@@ -2,12 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 svg {
     @apply inline
 }
-
 
 input {
     @apply bg-transparent outline-none;

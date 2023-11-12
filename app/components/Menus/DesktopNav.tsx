@@ -8,11 +8,11 @@ const DesktopNav = () => {
 
   return (
     <nav
-      className={`hidden mx-auto max-w-5xl px-6 lg:flex justify-between items-center py-6`}
+      className={`mx-auto max-w-5xl px-6 flex justify-between items-center py-6`}
     >
       <div className="flex items-center">
         <h1 className="text-3xl font-semibold">
-          <Link href="/">Rocket NextJs</Link>
+          <Link href="/">neryatrade</Link>
         </h1>
       </div>
       <div className="flex items-center cursor-pointer">
