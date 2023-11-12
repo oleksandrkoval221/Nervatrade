@@ -1,5 +1,4 @@
 import { NextAuthProvider } from "../Provider";
-import Header from "../components/Header";
 import "./globals.css";
 
 export default function RootLayout({
@@ -7,13 +6,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
+  return ( 
     <html lang="en">
       <body>
         <NextAuthProvider>
           {children}
         </NextAuthProvider>
       </body>
-    </html>
+    </html> 
   );
 }

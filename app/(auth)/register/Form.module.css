@@ -5,12 +5,12 @@
 
 
 
-.form_container div {
+/* .form_container div {
     @apply mt-8;
-}
+} */
 
 @media(min-width: 640px) {
-    .form_container input {
+    .form_container fieldset input {
         min-width: 380px;
     }
 }

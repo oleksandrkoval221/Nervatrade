@@ -12,6 +12,7 @@ const config: Config = {
         dark: {
           main: '#000814',
           second: '#0D111C',
+          input: '#001D3D'
         },
         green: {
           main: '#8FFE09',

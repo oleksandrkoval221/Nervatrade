@@ -6,7 +6,7 @@ import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import { useForm, SubmitHandler } from "react-hook-form";
-import GoogleButton from "../GoogleButton";
+import GoogleButton from "../SSOButtons";
 import Loader from "../loading";
 
 type Inputs = {
