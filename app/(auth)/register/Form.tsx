@@ -63,10 +63,10 @@ const Form = () => {
     <form
       onSubmit={handleSubmit(formSubmit)}
       autoComplete="off"
-      className={`${styles.form_container} -mt-2 flex justify-center items-center flex-col`}
+      className={`${styles.form_container} flex justify-center items-center flex-col`}
     >
       <fieldset className="w-full mx-4 flex justify-center items-center flex-col">
-        <div className="w-full px-2 mt-8">
+        <div className="w-full px-2 mt-5">
           <label
             htmlFor="username"
             className="text-sm"
@@ -88,7 +88,7 @@ const Form = () => {
             </small>
           )}
         </div>
-        <div className="w-full px-2 mt-8">
+        <div className="w-full px-2 mt-5">
           <label
             htmlFor="email"
             className="text-sm"
@@ -110,7 +110,7 @@ const Form = () => {
           )}
         </div>
 
-        <div className="w-full px-2 mt-8">
+        <div className="w-full px-2 mt-5">
           <label
             htmlFor="password"
             className="text-sm"
@@ -139,7 +139,7 @@ const Form = () => {
           <span className="checkmark"></span>
         </label>
       </div>
-      <div className="flex flex-col w-full items-center px-1 mt-8 gap-6">
+      <div className="flex flex-col w-full items-center px-1 mt-5 gap-6">
         {message && <small className="block text-red-600">{message}</small>}
         <button
           type="submit"
