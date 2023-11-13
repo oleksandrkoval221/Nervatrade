@@ -1,10 +1,17 @@
 import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
+// @ts-ignore
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+
+// providers
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
+import AppleProvider from "next-auth/providers/apple";
+
 import dbConnect from "./dbConnect";
 import clientPromise from "./clientPromise";
+// @ts-ignore
 import bcrypt from "bcryptjs";
 import User from "../models/User";
 
@@ -20,7 +27,14 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.AUTH_GOOGLE_ID!,
       clientSecret: process.env.AUTH_GOOGLE_SECRET!,
     }),
-    // ...add more providers here
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
+    }),
+    AppleProvider({
+      clientId: process.env.APPLE_ID!,
+      clientSecret: process.env.APPLE_SECRET!
+    }),
     CredentialsProvider({
       name: "Credentials",
       id: "credentials",
