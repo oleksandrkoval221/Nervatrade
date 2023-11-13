@@ -4,7 +4,6 @@ import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./Form.module.css";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
-import { BsArrowRightCircleFill } from "react-icons/bs";
 import { useForm, SubmitHandler } from "react-hook-form";
 import GoogleButton from "../SSOButtons";
 import Loader from "../loading";
@@ -53,9 +52,7 @@ const Form = () => {
       onSubmit={handleSubmit(formSubmit)}
       className={`${styles.form_container} flex justify-center items-center flex-col`}
     >
-      <h2
-        className={`leading-[1.15] mt-12 mx-auto w-full  px-2 text-xl my-6 sm:text-2xl font-semibold  font-Poppins`}
-      >
+      <h2 className="leading-[1.15] mt-12 mx-auto w-full px-2 text-xl my-6 sm:text-2xl font-bold  font-Poppins">
         Log In
       </h2>
 
@@ -64,7 +61,7 @@ const Form = () => {
           className="w-full "
           htmlFor="email"
         >
-          Email
+          Email Address
         </label>
         <input
           type="email"
@@ -72,7 +69,8 @@ const Form = () => {
             required: "Email is required",
             pattern: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
           })}
-          className=" w-full   border-solid border-[1px] border-[#EAECEF]"
+          className="p-3 w-full bg-dark-input rounded-lg"
+          placeholder="Your email"
         />
         {errors.email?.message && (
           <small className="block text-red-600 w-full">
@@ -80,7 +78,7 @@ const Form = () => {
           </small>
         )}
       </fieldset>
-      <fieldset className="w-full px-2 mt-12 flex justify-center items-center flex-col">
+      <fieldset className="w-full px-2 mt-5 flex justify-center items-center flex-col">
         <label
           className="w-full"
           htmlFor="password"
@@ -92,7 +90,8 @@ const Form = () => {
           {...register("password", {
             required: "Password is required",
           })}
-          className=" w-full   border-solid border-[1px] border-[#EAECEF]"
+          className="p-3 w-full bg-dark-input rounded-lg"
+          placeholder="*********"
         />
         {errors.password?.message && (
           <small className="block text-red-600 w-full">
@@ -101,19 +100,20 @@ const Form = () => {
         )}
       </fieldset>
       <div className={`flex flex-col justify-center w-full items-center px-2`}>
+        <div className="w-full text-right mt-4 cursor-pointer">
+          Forgot password?
+        </div>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full flex justify-center items-center"
+          className="text-center flex-1 w-full bg-green-main font-semibold rounded-lg p-[0.7rem] px-4 text-black cursor-pointer mt-5"
         >
-          <span className="text-center flex-1   mt-6 bg-green-700 hover:bg-lightColor hover:font-semibold rounded-md p-[1rem] px-4  text-white cursor-pointer">
             Log in
-          </span>
         </button>
         <p
-          className={`py-6  text-[#707a8a] text-center ${styles.login_continue}`}
+          className={`py-6 text-[#707a8a] text-center ${styles.login_continue}`}
         >
-          <span className="mr-1 "> Or</span>
+          <span className="mr-1 "> Or Login with</span>
         </p>
       </div>
       <div className="flex w-full justify-center px-2 text-lg items-center">
@@ -122,17 +122,13 @@ const Form = () => {
       {error && (
         <small className="block w-full px-2 text-red-600">{error}</small>
       )}
-
-      <div className="py-4 px-2 w-full">
-        <p>
+      <div className="mt-16">
+        <p className="text-center">
+          Already have an account?
           <Link
             href="/register"
-            className="text-lightColor hover:text-primaryColor hover:underline"
-          >
-            {" "}
-            Create an Account
-            <BsArrowRightCircleFill className="ml-2" />
-          </Link>
+            className="text-green-main underline"
+          > Sign up</Link>
         </p>
       </div>
       {isSubmitting && <Loader />}

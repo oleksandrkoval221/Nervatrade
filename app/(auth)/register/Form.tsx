@@ -139,12 +139,12 @@ const Form = () => {
           <span className="checkmark"></span>
         </label>
       </div>
-      <div className="flex flex-col w-full items-center px-1 mt-5 gap-6">
+      <div className="flex flex-col w-full items-center px-2 mt-5 gap-6">
         {message && <small className="block text-red-600">{message}</small>}
         <button
           type="submit"
           disabled={isSubmitting}
-          className="text-center flex-1 w-full bg-green-main font-semibold rounded-lg p-[1rem] px-4 text-black cursor-pointer"
+          className="text-center flex-1 w-full bg-green-main font-semibold rounded-lg p-[0.7rem] px-4 text-black cursor-pointer"
         >
           Register
         </button>
@@ -156,7 +156,7 @@ const Form = () => {
           Already have an account?
           <Link
             href="/login"
-            className="text-green-main hover:underline"
+            className="text-green-main underline"
           > Log in</Link>
         </p>
       </div>

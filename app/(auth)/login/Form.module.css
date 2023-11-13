@@ -8,19 +8,12 @@
     content: '';
     display: inline-block;
     max-width: 170px;
-    width: calc(60% - 4em);
+    width: calc(77% - 10em);
     height: 2px;
     background-color: #EAECEF;
     vertical-align: middle;
     @apply mr-1;
 }
-
-.form_container input[type="email"],
-.form_container input[type="password"] {
-    padding: 1em;
-
-}
-
 
 
 .form_container>div {
