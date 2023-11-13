@@ -8,6 +8,7 @@ import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 import AppleProvider from "next-auth/providers/apple";
+import EmailProvider from "next-auth/providers/email"
 
 import dbConnect from "./dbConnect";
 import clientPromise from "./clientPromise";
@@ -19,6 +20,14 @@ export const authOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
   session: {
     strategy: "jwt",
+
+    // Seconds - How long until an idle session expires and is no longer valid.
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+
+    // Seconds - Throttle how frequently to write to database to extend a session.
+    // Use it to limit write operations. Set to 0 to always update the database.
+    // Note: This option is ignored if using JSON Web Tokens
+    updateAge: 24 * 60 * 60, // 24 hours
   },
   secret: process.env.NEXTAUTH_SECRET!,
   // Configure one or more authentication providers
@@ -27,14 +36,34 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.AUTH_GOOGLE_ID!,
       clientSecret: process.env.AUTH_GOOGLE_SECRET!,
     }),
+ 
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID!,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
     }),
+    
     AppleProvider({
       clientId: process.env.APPLE_ID!,
       clientSecret: process.env.APPLE_SECRET!
     }),
+   
+    EmailProvider({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        secureConnection: false,
+        requiresAuth: true,
+        domains: ["gmail.com", "googlemail.com"],
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD
+        },  
+        tls: { rejectUnauthorized: false }
+      },
+      from: process.env.EMAIL_FROM,
+      maxAge: 2 * 60 * 60, // How long email links are valid for (default 24h)
+    }),
+   
     CredentialsProvider({
       name: "Credentials",
       id: "credentials",
@@ -76,7 +105,8 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
     newUser: "/",
-    error: "/login",
+    error: "/auth/error",
+    verifyRequest: '/verify-request',
   },
   callbacks: {
     // We can pass in additional information from the user document MongoDB returns

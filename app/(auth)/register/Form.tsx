@@ -6,14 +6,17 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Loader from "../loading";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 
 import GoogleButton from "../SSOButtons";
+import { getMaxListeners } from "events";
+import { BsSkipForwardFill } from "react-icons/bs";
 
 type Inputs = {
   email: string;
   username: string;
   password: string;
+  termcondition: boolean;
 };
 
 const Form = () => {
@@ -33,6 +36,7 @@ const Form = () => {
       email: "",
       username: "",
       password: "",
+      termcondition: false
     },
   });
 
@@ -53,7 +57,10 @@ const Form = () => {
         }),
       });
       res.status === 201 &&
-        router.push("/login?success=Account has been created");
+        signIn("email", { email });
+
+      res.status === 500 &&
+        setMessage(res.statusText);
     } catch (err: any) {
       setMessage(err);
     }
@@ -135,10 +142,19 @@ const Form = () => {
       </fieldset>
       <div className="flex mt-5 justify-start items-center gap-2 w-full px-1">
         <label className="checkbox-container">I accept the terms and privacy policy
-          <input type="checkbox" />
+          <input
+            {...register("termcondition", {
+              required: "You must accept the terms and conditions to register an account",
+            })}
+            type="checkbox" />
           <span className="checkmark"></span>
         </label>
       </div>
+      {errors.termcondition?.message && (
+        <small className="block text-red-600">
+          {errors.termcondition.message}
+        </small>
+      )}
       <div className="flex flex-col w-full items-center px-2 mt-5 gap-6">
         {message && <small className="block text-red-600">{message}</small>}
         <button
