@@ -36,8 +36,7 @@ export const authOptions: NextAuthOptions = {
         await dbConnect();
         // Add logic here to look up the user from the credentials supplied
         if (credentials == null) return null;
-        // login
-
+        
         try {
           const user = await User.findOne({ email: credentials.email });
 
@@ -62,7 +61,7 @@ export const authOptions: NextAuthOptions = {
   ],
   pages: {
     signIn: "/login",
-    newUser: "/my/dashboard",
+    newUser: "/",
     error: "/login",
   },
   callbacks: {

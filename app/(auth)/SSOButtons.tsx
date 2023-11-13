@@ -11,7 +11,7 @@ const GoogleButton = () => {
   let callbackUrl = searchParams.get("callbackUrl")!;
 
   if (callbackUrl === null) {
-    callbackUrl = "/my/dashboard";
+    callbackUrl = "/";
   }
 
   return (
