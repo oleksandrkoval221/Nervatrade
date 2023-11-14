@@ -18,7 +18,7 @@ const DesktopNav = () => {
       <div className="flex items-center cursor-pointer">
         {session ? (
           <>
-            <p className="my-4 text-black  ">
+            <p className="my-4 ">
               Signed in as {session.user?.email}
             </p>
             <p
