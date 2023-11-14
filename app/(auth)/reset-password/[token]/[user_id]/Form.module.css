@@ -1,0 +1,8 @@
+.form_container input,
+.form_container label {
+    @apply block my-1;
+}
+
+.form_container>div {
+    @apply w-full;
+}

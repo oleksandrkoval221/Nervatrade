@@ -3,14 +3,13 @@ import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./Form.module.css";
 import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import GoogleButton from "../SSOButtons";
 import Loader from "../loading";
+import axios from "axios";
 
 type Inputs = {
   email: string;
-  password: string;
 };
 
 const Form = () => {
@@ -25,10 +24,10 @@ const Form = () => {
   } = useForm<Inputs>({
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
+  const [btnText, setBtnText] = useState<string | null>("Reset password");
   const [error, setError] = useState<string | null>("");
 
   useEffect(() => {
@@ -40,11 +39,19 @@ const Form = () => {
   }
 
   const formSubmit: SubmitHandler<Inputs> = (form) => {
-    const { email, password } = form;    
-    signIn("credentials", {
-      email,
-      password,
-    });
+    const { email } = form;    
+    axios.post('/api/auth/reset-password-link',{
+      email
+    }).then(res => {
+      console.log('res ===>>> ', res.data);
+      if(res.status === 201){
+        setError("");
+        setBtnText("Send Again");
+      }
+    }).catch(err => {
+      console.log("err ==>>> ", err)
+      setError(err?.response?.data);
+    })
   };
 
   return (
@@ -53,7 +60,7 @@ const Form = () => {
       className={`${styles.form_container} flex justify-center items-center flex-col`}
     >
       <h2 className="leading-[1.15] mt-12 mx-auto w-full px-2 text-xl my-6 sm:text-2xl font-bold  font-Poppins">
-        Log In
+        Forgot password?
       </h2>
 
       <fieldset className="w-full px-2 flex justify-center items-center flex-col">
@@ -78,57 +85,29 @@ const Form = () => {
           </small>
         )}
       </fieldset>
-      <fieldset className="w-full px-2 mt-5 flex justify-center items-center flex-col">
-        <label
-          className="w-full"
-          htmlFor="password"
-        >
-          Password
-        </label>
-        <input
-          type="password"
-          {...register("password", {
-            required: "Password is required",
-          })}
-          className="p-3 w-full bg-dark-input rounded-lg"
-          placeholder="*********"
-        />
-        {errors.password?.message && (
-          <small className="block text-red-600 w-full">
-            {errors.password.message}
-          </small>
-        )}
-      </fieldset>
+      {error && (
+        <small className="block w-full px-2 text-red-600">{error}</small>
+      )}
+      {
+        btnText !== "Reset password" && 
+        <div className="px-2">We've sent a link for reset password to your email</div>
+      }
       <div className={`flex flex-col justify-center w-full items-center px-2`}>
-        <div className="w-full text-right mt-4 cursor-pointer">
-          <Link href='/forget-password'>Forgot password?</Link>
-        </div>
         <button
           type="submit"
           disabled={isSubmitting}
           className="text-center flex-1 w-full bg-green-main font-semibold rounded-lg p-[0.7rem] px-4 text-black cursor-pointer mt-5"
         >
-            Log in
+            { btnText }
         </button>
-        <p
-          className={`py-6 text-[#707a8a] text-center ${styles.login_continue}`}
-        >
-          <span className="mr-1 "> Or Login with</span>
-        </p>
       </div>
-      <div className="flex w-full justify-center px-2 text-lg items-center">
-        <GoogleButton />
-      </div>
-      {error && (
-        <small className="block w-full px-2 text-red-600">{error}</small>
-      )}
-      <div className="mt-16">
+      <div className="mt-36">
         <p className="text-center">
-          Already have an account?
+          Remember password &nbsp;
           <Link
-            href="/register"
+            href="/login"
             className="text-green-main underline"
-          > Sign up</Link>
+          >Log In </Link>
         </p>
       </div>
       {isSubmitting && <Loader />}

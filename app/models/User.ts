@@ -15,6 +15,9 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    email_verified: {
+      type: Number,
+    }
   },
   { timestamps: true },
 );
