@@ -3,17 +3,20 @@ import dbConnect from "@/app/utilities/dbConnect";
 // @ts-ignore
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
+import { validatePasswordResetToken } from "@/app/utilities/token";
 
 
 export const POST = async (request: NextRequest) => {
-  const { email, password } = await request.json();
+  const { token, password, user_id } = await request.json();
 
   await dbConnect();
-
-  const hashedPassword = await bcrypt.hash(password, 5);
-
+  
   try {
-    User.updateOne({ email }, { password: hashedPassword })
+    const userId = await validatePasswordResetToken(token);
+
+    const hashedPassword = await bcrypt.hash(password, 5);
+
+    User.updateOne({ _id: userId }, { password: hashedPassword })
       .then(result => console.log(result))
       .catch(error => console.error(error));
 

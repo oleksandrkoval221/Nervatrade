@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, useParams } from "next/navigation";
 import styles from "./Form.module.css";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -9,13 +9,15 @@ import Loader from "../../../loading";
 import axios from "axios";
 
 type Inputs = {
-  email: string;
+  password: string;
+  confirm_password: string;
 };
 
 const Form = () => {
   const params = useSearchParams()!;
   const session = useSession();
   const router = useRouter();
+  const paramData = useParams();
 
   const {
     register,
@@ -23,7 +25,8 @@ const Form = () => {
     formState: { errors, isSubmitting },
   } = useForm<Inputs>({
     defaultValues: {
-      email: "",
+      password: "",
+      confirm_password: ""
     },
   });
 
@@ -39,14 +42,17 @@ const Form = () => {
   }
 
   const formSubmit: SubmitHandler<Inputs> = (form) => {
-    const { email } = form;    
-    axios.post('/api/auth/reset-password-link',{
-      email
+    const { password, confirm_password } = form;    
+    if(password !== confirm_password) {
+      setError("Passwords does not match");
+      return;
+    }
+    axios.post('/api/auth/reset-password',{
+      ...paramData,
+      password,
     }).then(res => {
-      console.log('res ===>>> ', res.data);
       if(res.status === 201){
-        setError("");
-        setBtnText("Send Again");
+        router?.push("/login");
       }
     }).catch(err => {
       console.log("err ==>>> ", err)
@@ -60,38 +66,53 @@ const Form = () => {
       className={`${styles.form_container} flex justify-center items-center flex-col`}
     >
       <h2 className="leading-[1.15] mt-12 mx-auto w-full px-2 text-xl my-6 sm:text-2xl font-bold  font-Poppins">
-        Forgot password?
+        Reset password
       </h2>
-
-      <fieldset className="w-full px-2 flex justify-center items-center flex-col">
+      <fieldset className="w-full px-2 mt-5 flex justify-center items-center flex-col">
         <label
-          className="w-full "
-          htmlFor="email"
+          className="w-full"
+          htmlFor="password"
         >
-          Email Address
+          Password
         </label>
         <input
-          type="email"
-          {...register("email", {
-            required: "Email is required",
-            pattern: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+          type="password"
+          {...register("password", {
+            required: "Password is required",
           })}
           className="p-3 w-full bg-dark-input rounded-lg"
-          placeholder="Your email"
+          placeholder="*********"
         />
-        {errors.email?.message && (
+        {errors.password?.message && (
           <small className="block text-red-600 w-full">
-            {errors.email.message}
+            {errors.password.message}
+          </small>
+        )}
+      </fieldset>
+      <fieldset className="w-full px-2 mt-5 flex justify-center items-center flex-col">
+        <label
+          className="w-full"
+          htmlFor="password"
+        >
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          {...register("confirm_password", {
+            required: "Confirm Password is required",
+          })}
+          className="p-3 w-full bg-dark-input rounded-lg"
+          placeholder="*********"
+        />
+        {errors.confirm_password?.message && (
+          <small className="block text-red-600 w-full">
+            {errors.confirm_password.message}
           </small>
         )}
       </fieldset>
       {error && (
         <small className="block w-full px-2 text-red-600">{error}</small>
       )}
-      {
-        btnText !== "Reset password" && 
-        <div className="px-2">We've sent a link for reset password to your email</div>
-      }
       <div className={`flex flex-col justify-center w-full items-center px-2`}>
         <button
           type="submit"

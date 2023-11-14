@@ -1,7 +1,6 @@
 import PasswordResetToken from "@/app/models/PasswordResetToken";
 import dbConnect from "@/app/utilities/dbConnect";
 import { generateRandomString, isWithinExpiration } from "lucia/utils";
-import mongoose, { Schema } from "mongoose";
 
 const EXPIRES_IN = 1000 * 60 * 60 * 2; // 2 hours
 
@@ -15,7 +14,7 @@ export const generatePasswordResetToken = async (userId: any) => {
       // and reuse the token if true
       return isWithinExpiration(Number(token.expires) - EXPIRES_IN / 2);
     });
-    if (reusableStoredToken) return reusableStoredToken.id;
+    if (reusableStoredToken) return reusableStoredToken.token;
   }
   const token = generateRandomString(63);
   const newToken = new PasswordResetToken({
