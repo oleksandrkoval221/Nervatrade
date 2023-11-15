@@ -12,7 +12,7 @@ const DesktopNav = () => {
     >
       <div className="flex items-center">
         <h1 className="text-3xl font-semibold">
-          <Link href="/">neryatrade</Link>
+          <Link href="/">Neryatrade</Link>
         </h1>
       </div>
       <div className="flex items-center cursor-pointer">
