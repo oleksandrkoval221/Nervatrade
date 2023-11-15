@@ -1,5 +1,5 @@
-import PasswordResetToken from "@/app/models/PasswordResetToken";
-import dbConnect from "@/app/utilities/dbConnect";
+import PasswordResetToken from "@/models/PasswordResetToken";
+import dbConnect from "@/utilities/dbConnect";
 import { generateRandomString, isWithinExpiration } from "lucia/utils";
 
 const EXPIRES_IN = 1000 * 60 * 60 * 2; // 2 hours

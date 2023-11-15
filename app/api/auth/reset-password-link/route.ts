@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import User from "@/app/models/User";
+import User from "@/models/User";
 
-import sendEmail from "@/app/utilities/sendEmail";
-import { generatePasswordResetToken } from "@/app/utilities/token";
+import sendEmail from "@/utilities/sendEmail";
+import { generatePasswordResetToken } from "@/utilities/token";
 
 export const POST = async (request: NextRequest) => {
   const { email } = await request.json();

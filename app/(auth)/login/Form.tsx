@@ -40,7 +40,7 @@ const Form = () => {
   }
 
   const formSubmit: SubmitHandler<Inputs> = (form) => {
-    const { email, password } = form;    
+    const { email, password } = form;
     signIn("credentials", {
       email,
       password,
@@ -108,8 +108,11 @@ const Form = () => {
           disabled={isSubmitting}
           className="text-center flex-1 w-full bg-green-main font-semibold rounded-lg p-[0.7rem] px-4 text-black cursor-pointer mt-5"
         >
-            Log in
+          Log in
         </button>
+        {error && (
+          <small className="block w-full mt-3 px-2 text-red-600">{error}</small>
+        )}
         <p
           className={`py-6 text-[#707a8a] text-center ${styles.login_continue}`}
         >
@@ -119,9 +122,6 @@ const Form = () => {
       <div className="flex w-full justify-center px-2 text-lg items-center">
         <GoogleButton />
       </div>
-      {error && (
-        <small className="block w-full px-2 text-red-600">{error}</small>
-      )}
       <div className="mt-16">
         <p className="text-center">
           Already have an account?
