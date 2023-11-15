@@ -57,7 +57,7 @@ const Form = () => {
         }),
       });
       res.status === 201 &&
-        signIn("email", { email });
+        signIn("email", { email, callbackUrl: '/dashboard' });
 
       res.status === 500 &&
         setMessage(res.statusText);

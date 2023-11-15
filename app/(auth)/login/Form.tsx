@@ -36,7 +36,7 @@ const Form = () => {
   }, [params]);
 
   if (session.status === "authenticated") {
-    router?.push("/");
+    router?.push("/dashboard");
   }
 
   const formSubmit: SubmitHandler<Inputs> = (form) => {
@@ -44,7 +44,7 @@ const Form = () => {
     signIn("credentials", {
       email,
       password,
-    });
+    }, { callbackUrl: '/dashboard' });
   };
 
   return (
