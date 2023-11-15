@@ -13,7 +13,7 @@ const config: Config = {
           main: '#000814',
           second: '#0D111C',
           input: '#001D3D'
-        },
+        }, 
         green: {
           main: '#8FFE09',
           second: '#8FFE09'
@@ -23,6 +23,7 @@ const config: Config = {
         },
         gray: {
           main: '#8C8C8C', 
+          second: '#91A7B4'
         }, 
         white: {
           main: '#FEFEFF'

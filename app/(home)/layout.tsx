@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { NextAuthProvider } from "../Provider";
-import Header from "@/components/Header";
+import SideMenubar from "./SideMenubar";
 
 export const metadata: Metadata = {
   title: "Nervatrade",
@@ -17,8 +17,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NextAuthProvider>
-          <Header />
-          {children}
+          <div className="flex flex-col md:flex-row flex-1 p-3">
+            <aside className="bg-dark-second w-full md:w-60 rounded-lg">
+              <SideMenubar />
+            </aside>
+            <main className="flex-1">{children}</main>
+          </div>
         </NextAuthProvider>
       </body>
     </html>
