@@ -20,10 +20,11 @@
 |   |   ├── layout.tsx
 |   |   └── loading.tsx
 │   ├── api              # API handler
-│   ├── components       # Page's components
-│   ├── models           # MongoDB schema
-│   ├── utilities        # Utility folder
 │   └── Provider.tsx     # NuxtAuth provider
+├── components           # Page's components
+├── context              # react context
+├── models               # MongoDB schema
+├── utilities            # Utility folder
 ├── tailwind.config.ts   # Tailwind CSS configuration
 ├── postcss.config.js    # Postcss configuration
 ├── eslintrc.json        # ESLint configuration
