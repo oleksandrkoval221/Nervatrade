@@ -10,32 +10,32 @@ export default [
     icon: 'Chart',
     iconHover: 'Chart-hover'
   },{
-    href: '/dashboard',
+    href: '/',
     title: 'Barometers',
     icon: 'Wallet',
     iconHover: 'Wallet-hover'
   },{
-    href: '/news-terminal',
+    href: '/',
     title: 'News terminal',
     icon: 'News-thin',
     iconHover: 'News-thin-hover'
   },{
-    href: '/dashboard',
+    href: '/',
     title: 'Mat Maps',
     icon: 'Map-pin',
     iconHover: 'Map-pin-hover'
   },{
-    href: '/dashboard',
+    href: '/',
     title: 'Trading Bots',
     icon: 'Arrow-Swap',
     iconHover: 'Arrow-Swap-hover'
   },{
-    href: '/dashboard',
+    href: '/',
     title: 'Order Flow',
     icon: 'Flow',
     iconHover: 'Flow-hover'
   },{
-    href: '/dashboard',
+    href: '/',
     title: 'Notifications',
     icon: 'Info',
     iconHover: 'Info-hover'

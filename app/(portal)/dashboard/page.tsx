@@ -9,14 +9,12 @@ export default async function Home() {
   }
 
   return (
-    <main className="mx-auto mt-4 max-w-5xl px-6">
-      <h1 className="text-3xl font-semibold">
-        {session && session !== null
-          ? " Welcome! You Signed In Successfully"
-          : "You are not Signed In."}
-      </h1>
-      <div className="text-2xl">
-        This is Dashboard page
+    <main className="mx-auto max-w-7xl md:pl-5">
+      <div className="flex justify-between items-center bg-dark-second rounded-lg h-20 px-6">
+        <div className="font-bold">Dashboards</div>
+        <div className="flex gap-3">
+          <button className="bg-green-main px-3 py-2 rounded text-dark-main hover:scale-105 duration-300">Create a dashboard</button>
+        </div>
       </div>
     </main>
   );

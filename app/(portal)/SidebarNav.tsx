@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from 'next/navigation'
 import menuItems from "./menuItems";
 import { signOut } from "next-auth/react";
 import { useToggle } from "@/context/SidebarContext";
 
 const SidebarNav = () => {
+  const pathname = usePathname();
+
   const { sidebarPin, toggleSidebar } = useToggle();
   const [menuOver, setMunuOver] = useState('');
 
@@ -33,11 +36,11 @@ const SidebarNav = () => {
             <li className='m-2' key={title}>
               <Link
                 href={href}
-                className={`flex gap-2 py-3 px-4 200 rounded text-gray-second hover:bg-green-second hover:text-black cursor-pointer`}
+                className={`flex gap-2 py-3 px-4 200 rounded hover:bg-green-second cursor-pointer ${pathname===href?'bg-green-main text-black':'text-gray-second'}`}
                 onMouseOver={() => setMunuOver(title)}
                 onMouseLeave={() => setMunuOver('')}
               >
-                <img src={`/icons/${menuOver === title ? iconHover : icon}.svg`} alt={`${title}`} />
+                <img src={`/icons/${pathname===href ? iconHover : icon}.svg`} alt={`${title}`} />
                 {!sidebarPin && title}
               </Link>
             </li>
