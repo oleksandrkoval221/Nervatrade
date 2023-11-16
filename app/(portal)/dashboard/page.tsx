@@ -2,7 +2,9 @@ import { authOptions } from "@/utilities/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
+import GridLayouts from "./GridLayouts";
+
+export default async function Dashboard() {
   const session = await getServerSession(authOptions);
   if (!session) {
     redirect("/login");
@@ -15,6 +17,9 @@ export default async function Home() {
         <div className="flex gap-3">
           <button className="bg-green-main px-3 py-2 rounded text-dark-main hover:scale-105 duration-300">Create a dashboard</button>
         </div>
+      </div>
+      <div>
+        <GridLayouts />
       </div>
     </main>
   );
