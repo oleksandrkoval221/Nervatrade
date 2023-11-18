@@ -12,7 +12,8 @@ const config: Config = {
         dark: {
           main: '#000814',
           second: '#0D111C',
-          input: '#001D3D'
+          input: '#001D3D',
+          modal: '#131827'
         }, 
         green: {
           main: '#8FFE09',

@@ -1,19 +1,28 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+
 import { NextAuthProvider } from "../Provider";
 import SidebarContext from "@/context/SidebarContext";
 import SideMenubar from "./SidebarNav";
+
+import { authOptions } from "@/utilities/auth";
 
 export const metadata: Metadata = {
   title: "Nervatrade | Dashboard",
   description: "Welcome to Financial Insights!",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
+  if (!session)
+    redirect("/login");
+
   return (
     <html lang="en">
       <body>
