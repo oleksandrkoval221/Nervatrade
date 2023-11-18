@@ -4,6 +4,7 @@ import { useState } from "react";
 import NoBarometers from "./NoBarometers";
 import GridLayouts from "./GridLayouts";
 import AppModal from "@/components/AppModal";
+import CreateDashboard from "./Forms/CreateDashboard";
 
 export default function Dashboard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -19,7 +20,7 @@ export default function Dashboard() {
   return (
     <main className="mx-auto max-w-7xl md:pl-5">
       <div className="flex justify-between items-center bg-dark-second rounded-lg h-20 px-6">
-        <div className="font-bold">Dashboards</div>
+        <h1 className="font-bold">Dashboards</h1>
         <div className="flex gap-3">
           <button
             onClick={() => handleCreateDashboard()}
@@ -32,8 +33,11 @@ export default function Dashboard() {
       </div>
 
       <AppModal isOpen={isOpenModal} closeModal={closeModal}>
-        <div>
+        <h2 className="text-2xl font-semibold">
           Create a dashboard
+        </h2>
+        <div className="flex flex-col justify-between">
+          <CreateDashboard />
         </div>
       </AppModal>
     </main>
