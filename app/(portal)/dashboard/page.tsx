@@ -12,7 +12,7 @@ export default function Dashboard() {
     setIsOpenModal(true);
   }
 
-  const closeModal = ()=>{
+  const closeModal = () => {
     setIsOpenModal(false);
   }
 
@@ -31,7 +31,11 @@ export default function Dashboard() {
         <NoBarometers />
       </div>
 
-      <AppModal isOpen={isOpenModal} closeModal={closeModal} />
+      <AppModal isOpen={isOpenModal} closeModal={closeModal}>
+        <div>
+          Create a dashboard
+        </div>
+      </AppModal>
     </main>
   );
 }
