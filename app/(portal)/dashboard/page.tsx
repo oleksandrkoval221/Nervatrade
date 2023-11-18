@@ -2,6 +2,7 @@ import { authOptions } from "@/utilities/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
+import NoBarometers from "./NoBarometers";
 import GridLayouts from "./GridLayouts";
 
 export default async function Dashboard() {
@@ -19,7 +20,8 @@ export default async function Dashboard() {
         </div>
       </div>
       <div>
-        <GridLayouts />
+        {/* <GridLayouts /> */}
+        <NoBarometers />
       </div>
     </main>
   );
