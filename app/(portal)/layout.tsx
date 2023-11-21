@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { NextAuthProvider } from "../Provider";
 import SidebarContext from "@/context/SidebarContext";
@@ -34,6 +36,7 @@ export default async function RootLayout({
             <main className="flex-1">{children}</main>
           </div>
         </NextAuthProvider>
+        <ToastContainer />
       </body>
     </html>
   );

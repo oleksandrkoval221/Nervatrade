@@ -1,11 +1,17 @@
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-
+import axios from "axios";
+import { toast } from "react-toastify";
 
 type Inputs = {
   dashboardName: string;
 };
 
-const CreateDashboard = () => {
+const CreateDashboard = ({ user_id }: {
+  user_id: string
+}) => {
+  const [error, setError] = useState<string | null>("");
+
   const {
     register,
     handleSubmit,
@@ -18,11 +24,20 @@ const CreateDashboard = () => {
 
   const formSubmit: SubmitHandler<Inputs> = (form) => {
     const { dashboardName } = form;
-
+    axios.post('/api/dashboard/create', {
+      dashboardName,
+      user_id
+    }).then(res => {
+      if (res.status === 201) {
+        toast(res.data, { type: 'success' })
+      }
+    }).catch(err => {
+      setError(err?.response?.data);
+    })
   };
 
   return (
-    <form onSubmit={handleSubmit(formSubmit)} className="my-8 w-[450px] lg:w-[630px]">
+    <form onSubmit={handleSubmit(formSubmit)} className="my-8 w-full sm:w-[450px] lg:w-[630px]">
       <fieldset className="w-full flex justify-center items-center flex-col">
         <label
           className="w-full "
@@ -44,14 +59,16 @@ const CreateDashboard = () => {
           </small>
         )}
       </fieldset>
-      
+      {error && (
+        <small className="block w-full px-2 text-red-600">{error}</small>
+      )}
       <button
-          type="submit"
-          disabled={isSubmitting}
-          className="text-center flex-1 w-full bg-green-main font-semibold rounded-lg p-[0.7rem] px-4 text-black cursor-pointer mt-5"
-        >
-          Create
-        </button>
+        type="submit"
+        disabled={isSubmitting}
+        className="text-center flex-1 w-full bg-green-main font-semibold rounded-lg p-[0.7rem] px-4 text-black cursor-pointer mt-5"
+      >
+        Create
+      </button>
     </form>
   )
 }

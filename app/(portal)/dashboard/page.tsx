@@ -1,13 +1,27 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useSession } from "next-auth/react";
 
 import NoBarometers from "./NoBarometers";
 import GridLayouts from "./GridLayouts";
 import AppModal from "@/components/AppModal";
 import CreateDashboard from "./Forms/CreateDashboard";
+import DashboardList from "./DashboardList";
 
 export default function Dashboard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [userId, setUserId] = useState('');
+  const { data: session } = useSession();
+  useEffect(()=>{
+    if(session){
+      const { user: { _id } }:any = session;
+      setUserId(_id)
+    }
+  },[session])
+
+  const [dashboards, setDashboards] = useState([]);
 
   const handleCreateDashboard = () => {
     setIsOpenModal(true);
@@ -16,6 +30,20 @@ export default function Dashboard() {
   const closeModal = () => {
     setIsOpenModal(false);
   }
+
+  useEffect(()=>{
+    if(!userId) return;
+
+    axios.get(`/api/dashboard/get-dashboards?user_id=${userId}`)
+    .then(res => {
+      if (res.status === 200 && res.data) {
+        setDashboards(res.data);
+        closeModal();
+      }
+    }).catch(err => {
+      toast(err?.response?.data, { type: 'error' });
+    })
+  },[userId])
 
   return (
     <main className="mx-auto max-w-7xl md:pl-5">
@@ -29,7 +57,13 @@ export default function Dashboard() {
       </div>
       <div>
         {/* <GridLayouts /> */}
-        <NoBarometers />
+        {
+          dashboards.length ? 
+          <DashboardList list={dashboards} /> 
+          :
+          <NoBarometers />
+        }
+        
       </div>
 
       <AppModal isOpen={isOpenModal} closeModal={closeModal}>
@@ -37,7 +71,7 @@ export default function Dashboard() {
           Create a dashboard
         </h2>
         <div className="flex flex-col justify-between">
-          <CreateDashboard />
+          <CreateDashboard user_id={userId} />
         </div>
       </AppModal>
     </main>
