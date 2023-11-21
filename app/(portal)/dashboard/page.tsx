@@ -60,7 +60,7 @@ export default function Dashboard() {
         {/* <GridLayouts /> */}
         {
           dashboards.length ?
-            <DashboardList list={dashboards} />
+            <DashboardList list={dashboards} setDashboards={setDashboards} />
             :
             <NoBarometers />
         }
