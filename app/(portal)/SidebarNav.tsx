@@ -9,7 +9,7 @@ import { useToggle } from "@/context/SidebarContext";
 
 const SidebarNav = () => {
   const pathname = usePathname();
-
+  // @ts-ignore
   const { sidebarPin, toggleSidebar } = useToggle();
   const [menuOver, setMunuOver] = useState('');
 
@@ -21,26 +21,26 @@ const SidebarNav = () => {
             <a href="/" className={`flex p-3 cursor-pointer relative z-10`}>
               {
                 !sidebarPin ?
-                <img src="/images/logo.png" className="mx-2" alt="logo" />
-                :
-                <img src="/images/logo-white-1.png" className="" alt="logo" />
+                  <img src="/images/logo.png" className="mx-2" alt="logo" />
+                  :
+                  <img src="/images/logo-white-1.png" className="" alt="logo" />
               }
             </a>
             <button
               onClick={() => toggleSidebar()}
               className="absolute bg-dark-second top-0 -right-6 w-12 h-12 rounded-lg flex justify-center items-center">
-              <img src="/icons/arrow-right.png" className={`w-2 ${!sidebarPin?'rotate-180':''} ml-5`} alt="arrow" />
+              <img src="/icons/arrow-right.png" className={`w-2 ${!sidebarPin ? 'rotate-180' : ''} ml-5`} alt="arrow" />
             </button>
           </div>
           {menuItems.map(({ href, title, icon, iconHover }) => (
             <li className='m-2' key={title}>
               <Link
                 href={href}
-                className={`flex gap-2 py-3 px-4 200 rounded hover:bg-green-second cursor-pointer ${pathname===href?'bg-green-main text-black':'text-gray-second'}`}
+                className={`flex gap-2 py-3 px-4 200 rounded hover:bg-green-second cursor-pointer ${pathname === href ? 'bg-green-main text-black' : 'text-gray-second'}`}
                 onMouseOver={() => setMunuOver(title)}
                 onMouseLeave={() => setMunuOver('')}
               >
-                <img src={`/icons/${pathname===href ? iconHover : icon}.svg`} alt={`${title}`} />
+                <img src={`/icons/${pathname === href ? iconHover : icon}.svg`} alt={`${title}`} />
                 {!sidebarPin && title}
               </Link>
             </li>

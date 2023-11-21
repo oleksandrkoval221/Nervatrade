@@ -15,9 +15,7 @@ export const POST = async (request: NextRequest) => {
   
     await newDashboard.save();
 
-    return new NextResponse("Create a new dashboard", {
-      status: 201,
-    });
+    return NextResponse.json(newDashboard);
   } catch (err: any) {
     return new NextResponse(err.message, {
       status: 500,

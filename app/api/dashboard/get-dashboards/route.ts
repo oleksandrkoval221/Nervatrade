@@ -9,8 +9,8 @@ export async function GET(request: NextRequest) {
   const user_id = searchParams.get('user_id')
 
   try {
-    const user = await Dashboard.find({ user_id });
-    return NextResponse.json(user)
+    const dashboards = await Dashboard.find({ user_id });
+    return NextResponse.json(dashboards)
   } catch (err:any) {
     return new NextResponse(err.message, {
       status: 500,

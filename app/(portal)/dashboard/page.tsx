@@ -4,6 +4,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 
+import { useToggle } from "@/context/DashboardContext";
+
 import NoBarometers from "./NoBarometers";
 import GridLayouts from "./GridLayouts";
 import AppModal from "@/components/AppModal";
@@ -14,39 +16,38 @@ export default function Dashboard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [userId, setUserId] = useState('');
   const { data: session } = useSession();
-  useEffect(()=>{
-    if(session){
-      const { user: { _id } }:any = session;
+  useEffect(() => {
+    if (session) {
+      const { user: { _id } }: any = session;
       setUserId(_id)
     }
-  },[session])
+  }, [session])
 
-  const [dashboards, setDashboards] = useState([]);
+  // @ts-ignore
+  const { dashboards, setDashboards } = useToggle();
 
   const handleCreateDashboard = () => {
     setIsOpenModal(true);
   }
-
   const closeModal = () => {
     setIsOpenModal(false);
   }
 
-  useEffect(()=>{
-    if(!userId) return;
+  useEffect(() => {
+    if (!userId) return;
 
     axios.get(`/api/dashboard/get-dashboards?user_id=${userId}`)
-    .then(res => {
-      if (res.status === 200 && res.data) {
-        setDashboards(res.data);
-        closeModal();
-      }
-    }).catch(err => {
-      toast(err?.response?.data, { type: 'error' });
-    })
-  },[userId])
+      .then(res => {
+        if (res.status === 200 && res.data) {
+          setDashboards(res.data);
+        }
+      }).catch(err => {
+        toast(err?.response?.data, { type: 'error' });
+      })
+  }, [userId])
 
   return (
-    <main className="mx-auto max-w-7xl md:pl-5">
+    <div className="mx-auto max-w-7xl md:pl-5">
       <div className="flex justify-between items-center bg-dark-second rounded-lg h-20 px-6">
         <h1 className="font-bold">Dashboards</h1>
         <div className="flex gap-3">
@@ -58,12 +59,12 @@ export default function Dashboard() {
       <div>
         {/* <GridLayouts /> */}
         {
-          dashboards.length ? 
-          <DashboardList list={dashboards} /> 
-          :
-          <NoBarometers />
+          dashboards.length ?
+            <DashboardList list={dashboards} />
+            :
+            <NoBarometers />
         }
-        
+
       </div>
 
       <AppModal isOpen={isOpenModal} closeModal={closeModal}>
@@ -71,9 +72,14 @@ export default function Dashboard() {
           Create a dashboard
         </h2>
         <div className="flex flex-col justify-between">
-          <CreateDashboard user_id={userId} />
+          <CreateDashboard 
+            user_id={userId} 
+            closeModal={closeModal} 
+            setDashboards={setDashboards}
+            dashboards={dashboards}
+            />
         </div>
       </AppModal>
-    </main>
+    </div>
   );
 }

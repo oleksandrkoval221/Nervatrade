@@ -7,8 +7,11 @@ type Inputs = {
   dashboardName: string;
 };
 
-const CreateDashboard = ({ user_id }: {
-  user_id: string
+const CreateDashboard = ({ user_id, closeModal, setDashboards, dashboards }: {
+  user_id: string,
+  closeModal: () => void,
+  setDashboards: any,
+  dashboards: any[]
 }) => {
   const [error, setError] = useState<string | null>("");
 
@@ -28,8 +31,13 @@ const CreateDashboard = ({ user_id }: {
       dashboardName,
       user_id
     }).then(res => {
-      if (res.status === 201) {
-        toast(res.data, { type: 'success' })
+      if (res.status === 200) {
+        setDashboards([
+          ...dashboards,
+          res.data
+        ])
+        toast('A new dashboard has been created', { type: 'success' });
+        closeModal();
       }
     }).catch(err => {
       setError(err?.response?.data);

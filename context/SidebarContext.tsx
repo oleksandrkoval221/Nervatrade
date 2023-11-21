@@ -1,14 +1,21 @@
 "use client"
 
-import { createContext, useState, useContext } from "react";
+import { ReactNode, createContext, useState, useContext } from "react";
 
-export const AppProvider = createContext();
+interface ContextType {
+  sidebarPin: boolean;
+  toggleSidebar: ()=>void;
+}
+
+export const AppProvider = createContext<ContextType|null>(null);
 
 export const useToggle = () => {
   return useContext(AppProvider);
 };
 
-const SidebarContext = ({ children }) => {
+const SidebarContext = ({ children }: {
+  children: ReactNode
+}) => {
   const [sidebarPin, setSidebarPin] = useState(false);
 
   const toggleSidebar = () => {

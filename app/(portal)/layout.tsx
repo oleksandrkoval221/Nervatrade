@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { NextAuthProvider } from "../Provider";
 import SidebarContext from "@/context/SidebarContext";
+import DashboardContext from "@/context/DashboardContext";
 import SideMenubar from "./SidebarNav";
 
 import { authOptions } from "@/utilities/auth";
@@ -33,7 +34,11 @@ export default async function RootLayout({
             <SidebarContext>
               <SideMenubar />
             </SidebarContext>
-            <main className="flex-1">{children}</main>
+            <main className="flex-1">
+              <DashboardContext>
+                {children}
+              </DashboardContext>
+            </main>
           </div>
         </NextAuthProvider>
         <ToastContainer />
