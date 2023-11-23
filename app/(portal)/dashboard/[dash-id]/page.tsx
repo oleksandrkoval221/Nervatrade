@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react"
+import Link from "next/link";
 import GridLayouts from "../GridLayouts";
 import AppModal from "@/components/AppModal";
 import BarometerList from "../BarometerList";
@@ -13,7 +14,7 @@ export default function Edit() {
   return (
     <div className="mx-auto max-w-7xl md:pl-5">
       <div className="flex justify-between items-center bg-dark-second rounded-lg h-20 px-6">
-        <h1 className="font-bold">Dashboard / Edit</h1>
+        <h1 className="font-bold"><Link className="underline" href={'/dashboard'}>Dashboard</Link> / Edit</h1>
         <div className="flex gap-3">
           <button
             onClick={() => setIsOpenModal(true)}
