@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 import { useToggle } from "@/context/DashboardContext";
 
 import NoBarometers from "./NoBarometers";
-import GridLayouts from "./GridLayouts";
 import AppModal from "@/components/AppModal";
 import CreateDashboard from "./Forms/CreateDashboard";
 import DashboardList from "./DashboardList";
@@ -57,7 +56,6 @@ export default function Dashboard() {
         </div>
       </div>
       <div>
-        {/* <GridLayouts /> */}
         {
           dashboards.length ?
             <DashboardList list={dashboards} setDashboards={setDashboards} />

@@ -2,11 +2,14 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import axios from 'axios';
+import { useRouter } from "next/navigation";
 
 const DashboardList = ({ list, setDashboards }: {
   list: any[],
   setDashboards: any
 }) => {
+  const router = useRouter();
+
   const handleClickDelete = async (dashboardId: string) => {
     const res = await axios.delete(`/api/dashboard/delete?dash_id=${dashboardId}`);
     try {
@@ -59,7 +62,9 @@ const DashboardList = ({ list, setDashboards }: {
               <button
                 onClick={() => deleteRow(dashboard)}
                 className="rounded-lg py-2 px-4 border border-red-main">Delete</button>
-              <button className="rounded-lg py-2 px-4 border border-gray-100">Edit</button>
+              <button 
+                onClick={() => router?.push(`/dashboard/${dashboard?._id}`)}
+                className="rounded-lg py-2 px-4 border border-gray-100">Edit</button>
             </div>
           </div>
         )

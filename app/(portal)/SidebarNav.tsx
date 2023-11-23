@@ -14,7 +14,7 @@ const SidebarNav = () => {
   const [menuOver, setMunuOver] = useState('');
 
   return (
-    <aside className={`bg-dark-second w-full ${sidebarPin ? 'md:w-16' : 'md:w-60'} rounded-lg`}>
+    <aside className={`hidden md:block bg-dark-second w-full ${sidebarPin ? 'md:w-16' : 'md:w-60'} rounded-lg`}>
       <nav className="pb-2 min-h-[calc(100vh-30px)] flex flex-col justify-between">
         <ul>
           <div className='mx-2 my-4 relative'>
