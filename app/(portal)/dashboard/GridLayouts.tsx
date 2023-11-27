@@ -53,7 +53,8 @@ export default function GridLayouts({layout, setlayout, editFlag}: propsType) {
         rowHeight={30}
         cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         layout={layout}
-        onLayoutChange={(layout: Layout)=>onLayoutChange(layout)}
+        onDragStop={(layout: Layout)=>onLayoutChange(layout)}
+        onResizeStop={(layout: Layout)=>onLayoutChange(layout)}
         // WidthProvider option
         measureBeforeMount={false}
         // I like to have it animate on mount. If you don't, delete `useCSSTransforms` (it's default `true`)
