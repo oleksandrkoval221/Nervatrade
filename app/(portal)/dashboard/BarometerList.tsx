@@ -1,29 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import baralist from "@/constants/barometers";
 
-const list = [
-  {
-    _id: "1",
-    name: "Interest Rate"
-  }, {
-    _id: "2",
-    name: "Bitcoin Dominance"
-  }, {
-    _id: "3",
-    name: "Heatmap"
-  }, {
-    _id: "4",
-    name: "Order Flow"
-  }, {
-    _id: "5",
-    name: "Trading Chart"
-  }
-];
+interface propsType {
+  addWidget: (w:any)=>void;
+  layout: any[];
+}
 
-const BarometerList = () => {
+const BarometerList = ({ addWidget, layout }: propsType) => {
   const [selectedWidget, setSelectedWidget] = useState<any[]>([]);
 
   const handleAddWidget = (bId: string) => {
-    setSelectedWidget([...selectedWidget, bId]);
+    const w = [...selectedWidget, bId];
+    setSelectedWidget(w);
+    addWidget(w);
   }
 
   const handleRemoveWidget = (bId: string) => {
@@ -33,13 +22,22 @@ const BarometerList = () => {
       ary.splice(indexToDelete, 1);
     }
     setSelectedWidget(ary);
+    addWidget(ary);
   }
+
+  useEffect(()=>{
+    let wIds:any = [];
+    layout.map(val => {
+      wIds.push(val['i']);
+    })
+    setSelectedWidget(wIds);
+  },[layout])
 
   return (
     <div className="w-full md:w-[750px] lg:w-[900px] rounded-lg mt-4 overflow-y-auto">
       {
-        list &&
-        list.map((barometer, i) =>
+        baralist &&
+        baralist.map((barometer, i) =>
           <div key={i} className={`w-full rounded-lg flex items-center justify-between p-4 ${i % 2 === 0 && 'bg-dark-main'}`}>
             <div className="flex items-center gap-2">
               <div className="border border-gray-100 rounded px-1">{String(i + 1).padStart(2, '0')}</div>

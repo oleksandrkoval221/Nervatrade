@@ -1,15 +1,93 @@
 'use client';
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link";
-import GridLayouts from "../GridLayouts";
+import { useSession } from "next-auth/react";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 import AppModal from "@/components/AppModal";
+import GridLayouts from "../GridLayouts";
 import BarometerList from "../BarometerList";
 
-export default function Edit() {
+export default function Edit({ params }: { params: { 'dash-id': string } }) {
+  const { data: session } = useSession();
+  
   const [isOpenModal, setIsOpenModal] = useState(false);
   const closeModal = () => {
     setIsOpenModal(false);
   }
+
+  const [btnFlag, setBtnFlag] = useState(false);
+  const [editFlag, setEditFlag] = useState(false);
+  const [editedWidgets, setEditedWidgets] = useState<any[]>([]);
+  const [layout, setlayout] = useState<any[]>([]);
+
+  // handle Save Dashboard
+  const handleSaveDash = () => {
+    const { user }: any = session;
+    axios.post('/api/dashboard/layout/save', {
+      layout,
+      user_id: user?._id,
+      dash_id: params["dash-id"]
+    }).then((res)=>{
+      if(res.status === 200) {
+        toast("Layout has been saved.", { type: 'success' });  
+      }
+    }).catch((err)=>{
+      toast(err?.response?.data, { type: 'error' });
+    })
+    setEditFlag(false);
+  }
+
+  const getDashLayout = () => {
+    const { user }: any = session;
+    axios.get(`/api/dashboard/layout/get?user_id=${user?._id}&dash_id=${params["dash-id"]}`)
+      .then(res => {
+        if (res.status === 200 && res.data) {
+          const { layout } = res.data;
+          setlayout(layout);
+          setBtnFlag(true);
+        }
+      }).catch(err => {
+        toast(err?.response?.data, { type: 'error' });
+      })
+  }
+
+  // handle edit dash action
+  const handleEditDash = () => {
+    setEditFlag(true);
+  }
+
+  /**
+   * handle click when add or remove on barometer modal
+   * @param {array} w 
+   */
+  const addWidget = (w: any[]) => {
+    setEditedWidgets(w)
+  }
+
+  // apply widget from barometers
+  const applyWidgets = () => {
+    const newLayout:any[] = [];
+    editedWidgets.map((val, i)=>{
+      const result = layout.find(ly => ly.i === val);
+      if(!result) {
+        newLayout.push({i: val, x:0, y:0, w: 6, h: 6})
+      } else {
+        newLayout.push(result);
+      }
+    })
+
+    setlayout(newLayout);
+    setEditFlag(true);
+    setBtnFlag(true);
+    closeModal();
+  }
+
+  useEffect(()=>{
+    if(!session) return;
+    getDashLayout();
+  }, [session])
 
   return (
     <div className="mx-auto max-w-7xl md:pl-5">
@@ -21,21 +99,26 @@ export default function Edit() {
             className="bg-blue-500 px-3 py-2 rounded hover:scale-105 duration-300">
             + Add a barometer
           </button>
-          <button
-            onClick={() => { }}
-            className="bg-gray-100 text-black px-3 py-2 rounded hover:scale-105 duration-300">
-            Edit
-          </button>
-          <button
-            onClick={() => { }}
-            className="bg-green-main text-black px-3 py-2 rounded hover:scale-105 duration-300">
-            Save
-          </button>
+          {
+            btnFlag &&
+            <>
+              <button
+                onClick={() => handleEditDash()}
+                className="bg-gray-100 text-black px-3 py-2 rounded hover:scale-105 duration-300">
+                Edit
+              </button>
+              <button
+                onClick={() => handleSaveDash()}
+                className="bg-green-main text-black px-3 py-2 rounded hover:scale-105 duration-300">
+                Save
+              </button>
+            </>
+          }
         </div>
       </div>
 
       <div className="py-2">
-        <GridLayouts />
+        <GridLayouts layout={layout} setlayout={setlayout} editFlag={editFlag} />
       </div>
 
       <AppModal isOpen={isOpenModal} closeModal={closeModal}>
@@ -66,7 +149,11 @@ export default function Edit() {
           </div>
         </div>
         <div className="flex flex-col justify-between py-4">
-          <BarometerList />
+          <BarometerList addWidget={addWidget} layout={layout} />
+        </div>
+        <div className="flex justify-center w-full gap-4">
+          <button onClick={() => applyWidgets()} className="bg-blue-500 px-5 py-2 rounded hover:scale-105 duration-300">Sure</button>
+          <button onClick={() => closeModal()} className="bg-gray-100 text-black px-3 py-2 rounded hover:scale-105 duration-300">Cancel</button>
         </div>
       </AppModal>
     </div>

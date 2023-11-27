@@ -30,7 +30,7 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <NextAuthProvider>
-          <div className="flex flex-col md:flex-row flex-1 p-3">
+          <div className="flex flex-col md:flex-row flex-1 p-3 overflow-clip">
             <SidebarContext>
               <SideMenubar />
             </SidebarContext>

@@ -5,20 +5,28 @@ import { Responsive, WidthProvider, Layout } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 
+import baralist from "@/constants/barometers";
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive) as any;
 
-export default function GridLayouts() {
+interface propsType{
+  layout: any[];
+  setlayout: any;
+  editFlag: boolean;
+}
+export default function GridLayouts({layout, setlayout, editFlag}: propsType) {
   const [compactType, setcompactType] = useState<'vertical'|'horizontal'|null>("vertical");
   const [mounted, setmounted] = useState(false);
-  const [layout, setlayout] = useState<any[]>([
-    { i: "a", x: 0, y: 0, w: 1, h: 2 },
-    { i: "b", x: 1, y: 0, w: 3, h: 1 },
-    { i: "c", x: 4, y: 0, w: 1, h: 2 },
-    { i: "d", x: 0, y: 2, w: 1, h: 2 },
-    { i: "e", x: 0, y: 2, w: 1, h: 2 }
-  ]);
+
+  const [widgetList, setWidgetList] = useState<any>({});
 
   useEffect(() => {
+    const wList:any = {};
+    baralist.map((list, i)=>{
+      wList[list?._id] = list;
+    });
+    setWidgetList(wList);
+
     setmounted(true);
   }, []);
 
@@ -34,7 +42,7 @@ export default function GridLayouts() {
   // };
 
   const onLayoutChange = (layout: Layout) => {
-    console.log('layout ===>> ', layout);
+    setlayout(layout)
   }
 
   return (
@@ -53,12 +61,12 @@ export default function GridLayouts() {
         useCSSTransforms={mounted}
         compactType={compactType}
         preventCollision={!compactType}
-        // isDraggable={false}
-        // isResizable={false}
+        isDraggable={editFlag}
+        isResizable={editFlag}
       >
-        {layout.map((itm, i) => (
-          <div key={itm.i} data-grid={itm} className="bg-green-500">
-            {itm.i}
+        {layout && layout.map((itm, i) => (
+          <div key={itm.i} data-grid={itm} className={`flex justify-center items-center ${editFlag?"bg-green-700":"bg-green-500"}`}>
+            { widgetList[itm.i].name }
           </div>
         ))}
       </ResponsiveReactGridLayout>
