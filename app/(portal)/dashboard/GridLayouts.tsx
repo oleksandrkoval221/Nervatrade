@@ -67,7 +67,7 @@ export default function GridLayouts({layout, setlayout, editFlag}: propsType) {
       >
         {layout && layout.map((itm, i) => (
           <div key={itm.i} data-grid={itm} className={`flex justify-center items-center ${editFlag?"bg-green-700":"bg-green-500"}`}>
-            { widgetList[itm.i].name }
+            { widgetList[itm.i]?.name }
           </div>
         ))}
       </ResponsiveReactGridLayout>

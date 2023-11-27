@@ -13,7 +13,7 @@ const DashboardList = ({ list, setDashboards }: {
   const handleClickDelete = async (dashboardId: string) => {
     const res = await axios.delete(`/api/dashboard/delete?dash_id=${dashboardId}`);
     try {
-      if(res.status === 201) {
+      if (res.status === 201) {
         const dashboards = [...list];
         const index = dashboards.findIndex(obj => obj._id === dashboardId);
         if (index !== -1) {
@@ -53,17 +53,26 @@ const DashboardList = ({ list, setDashboards }: {
       {
         list &&
         list.map((dashboard, i) =>
-          <div key={i} className={`w-full rounded-lg flex items-center justify-between p-4 ${i % 2 === 0 && 'bg-dark-main'}`}>
+          <div
+            key={i}
+            onClick={() => router?.push(`/dashboard/${dashboard?._id}`)}
+            className={`w-full rounded-lg flex items-center justify-between cursor-pointer p-4 ${i % 2 === 0 && 'bg-dark-main'}`}>
             <div className="flex items-center gap-2">
               <div className="border border-gray-100 rounded px-1">{String(i + 1).padStart(2, '0')}</div>
               {dashboard.name}
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 relative z-50">
               <button
-                onClick={() => deleteRow(dashboard)}
+                onClick={(ev) => {
+                  ev.stopPropagation();
+                  deleteRow(dashboard)
+                }}
                 className="rounded-lg py-2 px-4 border border-red-main">Delete</button>
-              <button 
-                onClick={() => router?.push(`/dashboard/${dashboard?._id}`)}
+              <button
+                onClick={(ev) => {
+                  ev.stopPropagation();
+                  router?.push(`/dashboard/${dashboard?._id}/edit`)
+                }}
                 className="rounded-lg py-2 px-4 border border-gray-100">Edit</button>
             </div>
           </div>

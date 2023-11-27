@@ -1,8 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { useSession } from "next-auth/react";
 
 import { useToggle } from "@/context/DashboardContext";
 
@@ -13,17 +10,9 @@ import DashboardList from "./DashboardList";
 
 export default function Dashboard() {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [userId, setUserId] = useState('');
-  const { data: session } = useSession();
-  useEffect(() => {
-    if (session) {
-      const { user: { _id } }: any = session;
-      setUserId(_id)
-    }
-  }, [session])
 
   // @ts-ignore
-  const { dashboards, setDashboards } = useToggle();
+  const { userId, dashboards, setDashboards } = useToggle();
 
   const handleCreateDashboard = () => {
     setIsOpenModal(true);
@@ -31,19 +20,6 @@ export default function Dashboard() {
   const closeModal = () => {
     setIsOpenModal(false);
   }
-
-  useEffect(() => {
-    if (!userId) return;
-
-    axios.get(`/api/dashboard/get-dashboards?user_id=${userId}`)
-      .then(res => {
-        if (res.status === 200 && res.data) {
-          setDashboards(res.data);
-        }
-      }).catch(err => {
-        toast(err?.response?.data, { type: 'error' });
-      })
-  }, [userId])
 
   return (
     <div className="mx-auto max-w-7xl md:pl-5">
