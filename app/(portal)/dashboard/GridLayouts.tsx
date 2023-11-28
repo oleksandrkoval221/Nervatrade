@@ -48,7 +48,6 @@ export default function GridLayouts({layout, setlayout, editFlag}: propsType) {
   return (
     <div>
       {/* <div>Compaction type: {compactType || "No Compaction"}</div> */}
-      {/* <button onClick={onCompactTypeChange} className="">Change Compaction Type</button> */}
       <ResponsiveReactGridLayout
         rowHeight={30}
         cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
