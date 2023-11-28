@@ -66,8 +66,8 @@ export default function GridLayouts({layout, setlayout, editFlag}: propsType) {
         isResizable={editFlag}
       >
         {layout && layout.map((itm, i) => (
-          <div key={itm.i} data-grid={itm} className={`flex justify-center items-center ${editFlag?"bg-green-700":"bg-green-500"}`}>
-            { widgetList[itm.i]?.name }
+          <div key={itm.i} data-grid={itm} className={`flex justify-center items-center rounded-lg ${editFlag?"bg-[#16141D]":"bg-dark-second"}`}>
+            { widgetList[itm.i]?.component }
           </div>
         ))}
       </ResponsiveReactGridLayout>

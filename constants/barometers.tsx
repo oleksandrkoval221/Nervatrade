@@ -1,19 +1,26 @@
+import TradingViewWidget from "@/widgets/tradingviewChart/TradingViewWidget";
+
 const baralist = [
   {
     _id: "1",
-    name: "Interest Rate"
+    name: "Interest Rate",
+    component: <>Interest Rate</>
   }, {
     _id: "2",
-    name: "Bitcoin Dominance"
+    name: "Bitcoin Dominance",
+    component: <>Bitcoin Dominance</>
   }, {
     _id: "3",
-    name: "Heatmap"
+    name: "Heatmap",
+    component: <>Heatmap</>
   }, {
     _id: "4",
-    name: "Order Flow"
+    name: "Order Flow",
+    component: <>Order Flow</>
   }, {
     _id: "5",
-    name: "Trading Chart"
+    name: "Trading Chart",
+    component: <TradingViewWidget />
   }
 ];
 
