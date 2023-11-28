@@ -125,7 +125,7 @@ export default function Edit({ params: { slug } }: { params: { slug: any[] } }) 
         }
       </div>
 
-      <div className="py-2">
+      <div className="py-2 -mx-2">
         {
           layout.length>0 ?
             <GridLayouts layout={layout} setlayout={setlayout} editFlag={editFlag} />
