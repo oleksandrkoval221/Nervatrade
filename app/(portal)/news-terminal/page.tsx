@@ -1,4 +1,5 @@
 import CryptoNewsTerminal from "@/widgets/cryptoNews/CryptoNewsTerminal";
+import CryptoPriceAlert from "@/widgets/cryptoPriceAlert/CryptoPriceAlert";
 
 export default function NewsTerminal() {
 
@@ -12,7 +13,11 @@ export default function NewsTerminal() {
         </div>
         <div className="xl:col-span-7 grid lg:grid-cols-3 gap-4">
           <div className="lg:col-span-2">twitter feed</div>
-          <div className="lg:col-span-1">price alert</div>
+          <div className="lg:col-span-1">
+            <div className="h-[calc(100vh-30px)] flex justify-center items-center rounded-lg bg-dark-second">
+              <CryptoPriceAlert />
+            </div>
+          </div>
         </div>
       </div>
     </div>
