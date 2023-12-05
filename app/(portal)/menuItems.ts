@@ -5,6 +5,11 @@ export default [
     icon: 'Home',
     iconHover: 'Home-hover'
   },{
+    href: '/news-terminal',
+    title: 'News terminal',
+    icon: 'News-thin',
+    iconHover: 'News-thin-hover'
+  },{
     href: '/chart',
     title: 'Charts',
     icon: 'Chart',

@@ -22,7 +22,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl md:pl-5">
+    <div className="mx-auto w-full md:pl-5">
       <div className="flex justify-between items-center bg-dark-second rounded-lg h-20 px-6">
         <h1 className="font-bold">Dashboards</h1>
         <div className="flex gap-3">

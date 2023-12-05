@@ -95,7 +95,7 @@ export default function Edit({ params: { slug } }: { params: { slug: any[] } }) 
   }, [session])
 
   return (
-    <div className="mx-auto max-w-7xl md:pl-5">
+    <div className="mx-auto w-full md:pl-5">
       <div className="flex justify-between items-center bg-dark-second rounded-lg h-20 px-6">
         <h1 className="font-bold"><Link className="underline" href={'/dashboard'}>Dashboard</Link> / {getDashboardName(dashId) ?? ""}</h1>
         {
