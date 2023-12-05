@@ -1,8 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 
+interface propsType {
+  widgeTitle?: string;
+}
+
 let tvScriptLoadingPromise: any;
 
-export default function TradingViewWidget() {
+export default function TradingViewWidget({ widgeTitle }: propsType) {
   const onLoadScriptRef = useRef<any | null>(null);
 
   useEffect(
@@ -49,11 +53,11 @@ export default function TradingViewWidget() {
 
   return (
       <div className='tradingview-widget-container px-2' style={{ height: "100%", width: "100%" }}>
-        <div className='flex justify-between items-center px-3' style={{ height: '40px' }}>
-          <div className='font-semibold'>Trading Chart</div>
+        <div className='flex justify-between items-center px-3 h-[50px]'>
+          <div className='font-semibold'>{widgeTitle || "Trading Chart"}</div>
           <div></div>
         </div>
-        <div id='tradingview_d7af5' style={{ height: "calc(100% - 72px)", width: "100%" }} />
+        <div id='tradingview_d7af5' style={{ height: "calc(100% - 80px)", width: "100%" }} />
         <div className="tradingview-widget-copyright">
           <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span className="blue-text">Track all markets on TradingView</span></a>
         </div>
