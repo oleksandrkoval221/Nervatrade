@@ -13,7 +13,8 @@ const config: Config = {
           main: '#000814',
           second: '#0D111C',
           input: '#001D3D',
-          modal: '#131827'
+          modal: '#131827',
+          btn: '#1E1C26'
         }, 
         green: {
           main: '#8FFE09',
