@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Pagenation from "@/components/Pagenation";
+import axios from "axios";
 
 interface propsType {
   widgeTitle?: string;
@@ -9,6 +10,7 @@ interface propsType {
 
 const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [tweets, setTweets] = useState<any[]>([]);
 
   const dropWrapperRef = useRef<null>(null);
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -26,6 +28,20 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [dropWrapperRef]);
+
+  useEffect(() => {
+    axios.get('/api/widgets/twittertweets', {
+      params: {
+        currentPage
+      }
+    }).then(({ data }) => {
+      console.log('res', data.results);
+      // setTweets(data.results)
+    }).catch((err) => {
+      console.error(err.message);
+      // toast(err.message, { type: 'error' })
+    })
+  }, [currentPage])
 
   return (
     <div className="w-full h-full overflow-clip">

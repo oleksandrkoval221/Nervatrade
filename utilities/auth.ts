@@ -105,7 +105,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
     newUser: "/dashboard",
-    // error: "/login",
+    error: "/login",
     verifyRequest: '/verify-request',
   },
   callbacks: {
