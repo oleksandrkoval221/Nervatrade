@@ -11,6 +11,7 @@ interface propsType {
 const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [tweets, setTweets] = useState<any[]>([]);
+  const [apiErr, setApiErr] = useState("");
 
   const dropWrapperRef = useRef<null>(null);
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -29,18 +30,23 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
     };
   }, [dropWrapperRef]);
 
-  useEffect(() => {
+  const getData = async () => {
     axios.get('/api/widgets/twittertweets', {
       params: {
-        currentPage
+        "search": "crypto",
+        "limit": 20,
+        "id_only": false
       }
     }).then(({ data }) => {
-      console.log('res', data.results);
-      // setTweets(data.results)
+      setTweets(data)
     }).catch((err) => {
       console.error(err.message);
-      // toast(err.message, { type: 'error' })
+      setApiErr(err.message);
     })
+  }
+
+  useEffect(() => {
+    getData();
   }, [currentPage])
 
   return (
@@ -74,16 +80,16 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
       <div className="px-3 pt-3 h-[calc(100%-100px)]">
         <div className="px-3 h-full overflow-y-auto scroll-div">
           {
-            new Array(10).fill(0).map((val, i) =>
+            tweets.length > 0 && tweets.map((tweet, i) =>
               <div key={i} className={`flex gap-2 p-3 mb-2 ${i % 2 === 0 && 'bg-dark-modal'}`}>
                 <div className="flex-none w-10 h-10">
-                  <img src="/users/user1.png" className="w-full h-full rounded-full" alt="avater" />
+                  <img src={tweet.user.profileImageUrl || `/users/user1.png`} className="w-full h-full rounded-full" alt="avater" />
                 </div>
                 <div>
                   <div className="flex items-center gap-3">
-                    <h1>Whale Alert</h1> <small className="text-gray-300">@whale_alert</small>
+                    <h1>{tweet.user.displayname}</h1> <small className="text-gray-300">@{tweet.user.username}</small>
                   </div>
-                  <p className="text-xs text-gray-300">Funds inexplicably relocated from a concealed purse to an unfamiliar location, </p>
+                  <p className="text-xs text-gray-300">{tweet.rawContent}</p>
                   <div className="flex gap-3 mt-1">
                     <button className="px-2 pb-1 rounded text-xs bg-dark-btn">Long</button>
                     <button className="px-2 pb-1 rounded text-xs border border-dark-btn">Short</button>
@@ -91,6 +97,12 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
                 </div>
               </div>
             )
+          }
+          {
+            apiErr && tweets.length === 0 && <div className="text-center py-5">
+              {apiErr}
+              <div className="underline text-yellow-400 cursor-pointer" onClick={() => getData()}>refresh</div>
+            </div>
           }
         </div>
         <Pagenation

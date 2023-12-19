@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import axios from "axios";
-import { toast } from "react-toastify";
 
 import Coin from './Coin';
 
@@ -12,11 +11,16 @@ interface propsType {
 
 const CryptoPriceAlert = ({ widgeTitle }: propsType) => {
   const [coins, setCoins] = useState([]);
+  const [apiErr, setApiErr] = useState("");
 
-  useEffect(() => {
+  const getData = async () => {
     axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false')
       .then(({ data }) => setCoins(data))
-      .catch(err => toast(err.message, { type: 'error' }))
+      .catch(err => setApiErr(err.message))
+  }
+
+  useEffect(() => {
+    getData();
   }, [])
 
   return (
@@ -37,13 +41,19 @@ const CryptoPriceAlert = ({ widgeTitle }: propsType) => {
           <div className="border-b border-gray-500/20"></div>
           {
             coins.length > 0 &&
-            coins.map((coin:any) =>
+            coins.map((coin: any) =>
               <Coin key={coin.id} name={coin.name} image={coin.image}
                 symbol={coin.symbol} marketcap={coin.market_cap}
                 price={coin.current_price}
                 priceChange={coin.price_change_percentage_24h}
                 volume={coin.total_volume} />
             )
+          }
+          {
+            apiErr && coins.length === 0 && <div className="text-center py-5">
+              {apiErr}
+              <div className="underline text-yellow-400 cursor-pointer" onClick={() => getData()}>refresh</div>
+            </div>
           }
         </div>
       </div>

@@ -3,7 +3,6 @@
 import "./newsTerminal.css";
 import { useState, useEffect, useRef } from "react"
 import axios from "axios";
-import { toast } from "react-toastify";
 import Moment from 'react-moment';
 
 import Pagenation from "@/components/Pagenation";
@@ -15,22 +14,26 @@ interface propsType {
 const CryptoNewsTerminal = ({ widgeTitle }: propsType) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [newsList, setNewsList] = useState<any[]>([]);
+  const [apiErr, setApiErr] = useState("");
 
   const dropWrapperRef = useRef<null>(null);
   const [openDropdown, setOpenDropdown] = useState(false);
 
-  useEffect(() => {
+  const getData = async () => {
     axios.get('/api/widgets/cryptonews', {
       params: {
         currentPage
       }
     }).then(({ data }) => {
-      // console.log('res', data.results);
       setNewsList(data.results)
     }).catch((err) => {
       // console.error(err.message);
-      toast(err.message, { type: 'error' })
+      setApiErr(err.message);
     })
+  }
+
+  useEffect(() => {
+    getData();
   }, [currentPage])
 
   useEffect(() => {
@@ -120,6 +123,13 @@ const CryptoNewsTerminal = ({ widgeTitle }: propsType) => {
                 </div>
               </div>
             )
+          }
+          {
+            apiErr && newsList.length === 0 &&
+            <div className="text-center py-5">
+              {apiErr}
+              <div className="underline text-yellow-400 cursor-pointer" onClick={() => getData()}>refresh</div>
+            </div>
           }
         </div>
       </div>
