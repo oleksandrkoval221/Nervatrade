@@ -1,6 +1,8 @@
-import Button from "@/components/Button";
+'use client'
 import Link from "next/link";
 import type { Metadata } from "next";
+import YouTube from 'react-youtube';
+import Button from "@/components/Button";
 
 export const metadata: Metadata = {
   title: "Nervatrade | Home page",
@@ -9,6 +11,13 @@ export const metadata: Metadata = {
 
 
 export default async function Home() {
+  const youtubeOptions = {
+    width: '200',
+    height: '130',
+    playerVars: {
+      autoplay: 1,
+    },
+  };
 
   return (
     <main>
@@ -31,6 +40,7 @@ export default async function Home() {
           </div>
           <div className="static lg:absolute lg:top-24 lg:right-0 z-0 mb-[78px] lg:mb-0">
             <img src="/images/preview.png" />
+            <YouTube videoId="2g811Eo7K8U" opts={youtubeOptions} />
           </div>
           <ul className="flex justify-between lg:justify-start lg:gap-16 relative z-10">
             <li className="flex flex-col">
