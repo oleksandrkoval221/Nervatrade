@@ -19,7 +19,7 @@ const MobileNav = () => {
   ];
 
   return (
-    <nav>
+    <nav className="block lg:hidden">
       <div className="w-full h-[88px] flex items-center gap-5 px-4">
         <div className="z-[100] relative">
           <Hamburger
