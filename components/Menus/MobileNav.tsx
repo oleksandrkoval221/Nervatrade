@@ -5,48 +5,69 @@ import { useState } from "react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { BsPersonFill } from "react-icons/bs";
+import Button from '../Button';
 
 const MobileNav = () => {
   const [isOpen, setOpen] = useState(false);
   const { data: session } = useSession();
 
+  const links = [
+    { label: "Features", path: "/" },
+    { label: "Partners", path: "/" },
+    { label: "Pricing", path: "/" },
+    { label: "News", path: "/" },
+  ];
+
   return (
-    <nav className="flex max-w-3xl mx-auto sm:p-16 justify-between items-center lg:hidden p-6 cursor-pointer">
-      <h1 className=" font-semibold tracking-wider sm:text-lg z-[100]">
-        <Link href="/">Rocket NextJs</Link>
-      </h1>
-      <div className="z-[100] relative">
-        <Hamburger
-          size={25}
-          label="Show menu"
-          toggled={isOpen}
-          toggle={setOpen}
-        />
+    <nav>
+      <div className="w-full h-[88px] flex items-center gap-5 px-4">
+        <div className="z-[100] relative">
+          <Hamburger
+            size={25}
+            label="Show menu"
+            toggled={isOpen}
+            toggle={setOpen}
+          />
+        </div>
+        <Link href="/">
+          <img src="/images/logo-sm.png" alt="Logo" />
+        </Link>
       </div>
       {isOpen && (
-        <div className="flex absolute w-screen pt-[25%] bg-white z-50 inset-0 h-screen flex-col items-center cursor-pointer">
-          {session ? (
-            <>
-              <p className="my-4 text-black  ">
-                Signed in as {session.user?.email}
-              </p>
-              <p
-                onClick={() => signOut()}
-                className="bg-[#2c6e49] my-4 rounded-md p-2 px-4 mx-2 text-white"
-              >
-                <BsPersonFill /> Logout
-              </p>
-            </>
-          ) : (
+        <div className="flex absolute w-screen h-screen pt-[25%] bg-white z-50 inset-0 h-screen flex-col items-center cursor-pointer">
+          <div className="w-full h-full bg-dark-main px-5">
+            <ul className="flex flex-col gap-8 font-semibold text-base mb-8">
+              {
+                links.map((link, i) => <li key={i} className="text-[#626D7C] hover:text-[#FFF] transition text-center">
+                  <Link href={link.path}>{link.label}</Link>
+                </li>)
+              }
+            </ul>
             <div>
-              <p className="border-[1px] w-full my-4 text-center py-[10px] text-sm font-medium  border-solid rounded-[24px] px-6 border-green-700">
-                <Link href="/login">Log in</Link>
-              </p>
-              <p className="rounded-[24px] my-4 text-white font-medium text-sm shadow-button py-[10px] px-6 w-full text-center bg-green-700 ">
-                <Link href="/register">Register</Link>
-              </p>
+              {session ? (
+                <>
+                  <p className="my-4 ">
+                    Signed in as {session.user?.email}
+                  </p>
+                  <p
+                    onClick={() => signOut()}
+                    className="bg-green-700 ml-6 my-4 rounded-md p-2 px-4 mx-2 text-white"
+                  >
+                    <BsPersonFill /> Logout
+                  </p>
+                </>
+              ) : (
+                <div className="flex flex-col gap-5">
+                  <Link href="/login">
+                    <Button className="w-full" color="dark">Sign In</Button>
+                  </Link>
+                  <Link href="/register">
+                    <Button className="w-full" color="primary">Sign Up</Button>
+                  </Link>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
       )}
     </nav>

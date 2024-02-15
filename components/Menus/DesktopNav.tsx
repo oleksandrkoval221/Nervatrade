@@ -2,20 +2,37 @@
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { BsPersonFill } from "react-icons/bs";
+import Button from '../Button';
 
 const DesktopNav = () => {
   const { data: session } = useSession();
 
+  const links = [
+    { label: "Features", path: "/" },
+    { label: "Partners", path: "/" },
+    { label: "Pricing", path: "/" },
+    { label: "News", path: "/" },
+  ];
+
   return (
     <nav
-      className={`mx-auto max-w-5xl px-6 flex justify-between items-center py-6`}
+      className={`w-full max-w-container h-[88px] hidden lg:flex justify-between items-center px-16 mx-auto`}
     >
-      <div className="flex items-center">
-        <h1 className="text-3xl font-semibold">
-          <Link href="/">Neryatrade</Link>
-        </h1>
+      <div className="w-full max-w-[242px]">
+        <Link href="/">
+          <img src="/images/logo-sm.png" alt="Logo" />
+        </Link>
       </div>
-      <div className="flex items-center cursor-pointer">
+
+      <ul className="flex gap-8 font-semibold text-base">
+        {
+          links.map((link, i) => <li key={i} className="text-[#626D7C] hover:text-[#FFF] transition">
+            <Link href={link.path}>{link.label}</Link>
+          </li>)
+        }
+      </ul>
+
+      <div>
         {session ? (
           <>
             <p className="my-4 ">
@@ -29,16 +46,14 @@ const DesktopNav = () => {
             </p>
           </>
         ) : (
-          <>
-            {" "}
-
-            <Link href="/login" className="mx-4">
-              <p className="border-[1px] min-w-[168px] w-full text-center py-[10px] px-8 text-sm font-medium  border-solid rounded-[24px] border-green-700">Log in</p>
+          <div className="flex gap-5">
+            <Link href="/login">
+              <Button color="dark">Sign In</Button>
             </Link>
-            <Link href="/register" className="mx-4">
-              <p className="rounded-[24px] hover:bg-white hover:border-2 hover:text-green-700 hover:border-green-700 text-white font-medium text-sm shadow-button py-[10px] min-w-[168px] w-full text-center bg-green-700 ">Register</p>
+            <Link href="/register">
+              <Button color="primary">Sign Up</Button>
             </Link>
-          </>
+          </div>
         )}
       </div>
     </nav>

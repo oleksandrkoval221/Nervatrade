@@ -8,14 +8,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors:{
+      maxWidth: {
+        container: '1440px',
+      },
+      colors: {
         dark: {
           main: '#000814',
           second: '#0D111C',
           input: '#001D3D',
           modal: '#131827',
           btn: '#1E1C26'
-        }, 
+        },
         green: {
           main: '#8FFE09',
           second: '#8FFE09'
@@ -24,9 +27,9 @@ const config: Config = {
           main: '#FF415A',
         },
         gray: {
-          main: '#8C8C8C', 
+          main: '#8C8C8C',
           second: '#91A7B4'
-        }, 
+        },
         white: {
           main: '#FEFEFF'
         }

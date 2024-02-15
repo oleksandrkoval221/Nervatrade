@@ -1,5 +1,6 @@
 import { NextAuthProvider } from "../Provider";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 export default function RootLayout({
@@ -13,6 +14,7 @@ export default function RootLayout({
         <NextAuthProvider>
           <Header />
           {children}
+          <Footer />
         </NextAuthProvider>
       </body>
     </html>
