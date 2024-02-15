@@ -1,7 +1,5 @@
-'use client'
 import Link from "next/link";
 import type { Metadata } from "next";
-import YouTube from 'react-youtube';
 import Button from "@/components/Button";
 
 export const metadata: Metadata = {
@@ -11,14 +9,6 @@ export const metadata: Metadata = {
 
 
 export default async function Home() {
-  const youtubeOptions = {
-    width: '200',
-    height: '130',
-    playerVars: {
-      autoplay: 1,
-    },
-  };
-
   return (
     <main>
       <div className="mx-auto max-w-container relative px-3 lg:px-16 pt-8 lg:pt-[192px] pb-[42px] lg:pb-[72px]">
@@ -38,12 +28,12 @@ export default async function Home() {
               </div>
             </Button>
           </div>
-          <div className="static lg:absolute lg:top-24 lg:right-0 z-0 mb-[78px] lg:mb-0">
+          <div className="relative lg:absolute lg:top-24 lg:right-0 z-0 mb-[78px] lg:mb-0">
             <img src="/images/preview.png" />
-            <YouTube videoId="2g811Eo7K8U" opts={youtubeOptions} />
+            <iframe src="https://www.youtube.com/watch?v=3-iCDOYkfms" className="w-[120px] lg:w-[200px] h-20 lg:h-[130px] absolute -bottom-10 right-20" />
           </div>
           <ul className="flex justify-between lg:justify-start lg:gap-16 relative z-10">
-            <li className="flex flex-col">
+            <li className="flex flex-col">  
               <span className="font-medium text-sm lg:text-base text-[#626D7C]">Users</span>
               <span className="font-semibold text-2xl text-white">5000+</span>
             </li>
