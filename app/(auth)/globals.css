@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,7 +8,8 @@ html,
 body {
     background-color: #000814;
     color: #FEFEFF;
-    font-size: 18px;
+    font-size: 16px;
+    font-family: "Manrope", sans-serif;
 }
 
 svg {
@@ -40,7 +43,7 @@ input {
     display: flex;
     align-items: center;
     position: relative;
-    padding-left: 35px;
+    padding-left: 24px;
     margin-bottom: 12px;
     cursor: pointer;
     -webkit-user-select: none;
@@ -63,10 +66,11 @@ input {
     position: absolute;
     top: 2px;
     left: 0;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-color: #eee;
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+    border: 1px solid #343B45;
+    background-color: #151A1F;
 }
 
 /* On mouse-over, add a grey background color */
@@ -76,7 +80,7 @@ input {
 
 /* When the checkbox is checked, add a blue background */
 .checkbox-container input:checked~.checkmark {
-    background-color: #8FFE09;
+    background-color: #4DF986;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -93,8 +97,8 @@ input {
 
 /* Style the checkmark/indicator */
 .checkbox-container .checkmark:after {
-    left: 8px;
-    top: 5px;
+    left: 4.5px;
+    top: 1px;
     width: 5px;
     height: 10px;
     border: solid #000814;
@@ -118,5 +122,5 @@ input {
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 8px;
     border-radius: 8px;
-    background: #8FFE09;
+    background: #4DF986;
 }

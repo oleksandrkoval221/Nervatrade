@@ -70,15 +70,15 @@ const Form = () => {
     <form
       onSubmit={handleSubmit(formSubmit)}
       autoComplete="off"
-      className={`${styles.form_container} flex justify-center items-center flex-col`}
+      className={`${styles.form_container}`}
     >
-      <fieldset className="w-full mx-4 flex justify-center items-center flex-col">
-        <div className="w-full px-2 mt-5">
+      <fieldset className="w-full">
+        <div className="w-full mb-4">
           <label
             htmlFor="username"
-            className="text-sm"
+            className="w-full font-semibold text-sm !m-0 !mb-1"
           >
-            Username
+            Full name
           </label>
           <input
             {...register("username", {
@@ -86,8 +86,8 @@ const Form = () => {
             })}
             type="text"
             autoComplete="false"
-            className="p-3 w-full bg-dark-input rounded-lg"
-            placeholder="Your username"
+            className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white placeholder:text-[#343B45] px-3 !m-0 focus:border-2 focus:border-[#4DF986]"
+            placeholder="Enter your first and second name"
           />
           {errors.username?.message && (
             <small className="block text-red-600">
@@ -95,10 +95,10 @@ const Form = () => {
             </small>
           )}
         </div>
-        <div className="w-full px-2 mt-5">
+        <div className="w-full mb-4">
           <label
             htmlFor="email"
-            className="text-sm"
+            className="w-full font-semibold text-sm !m-0 !mb-1"
           >
             Email
           </label>
@@ -109,18 +109,18 @@ const Form = () => {
             })}
             type="email"
             autoComplete="off"
-            className="p-3 w-full bg-dark-input rounded-lg"
-            placeholder="Your email"
+            className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white placeholder:text-[#343B45] px-3 !m-0 focus:border-2 focus:border-[#4DF986]"
+            placeholder="Enter your email"
           />
           {errors.email?.message && (
             <small className="block text-red-600">{errors.email.message}</small>
           )}
         </div>
 
-        <div className="w-full px-2 mt-5">
+        <div className="w-full mb-6">
           <label
             htmlFor="password"
-            className="text-sm"
+            className="w-full font-semibold text-sm !m-0 !mb-1"
           >
             Password
           </label>
@@ -130,7 +130,7 @@ const Form = () => {
               required: "Password is required",
             })}
             autoComplete="new-password"
-            className="p-3 w-full bg-dark-input rounded-lg"
+            className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white placeholder:text-[#343B45] px-3 !m-0 focus:border-2 focus:border-[#4DF986]"
             placeholder="********"
           />
           {errors.password?.message && (
@@ -140,8 +140,11 @@ const Form = () => {
           )}
         </div>
       </fieldset>
-      <div className="flex mt-5 justify-start items-center gap-2 w-full px-1">
-        <label className="checkbox-container">I accept the terms and privacy policy
+      <div className="mb-6">
+        <label className="checkbox-container !my-0 !mb-6">
+          <p className="font-semibold text-[#626D7C]">
+            Creating an account means you’re okay with our <span className="text-[#4DF986]">Terms of Service</span> and <span className="text-[#4DF986]">Privacy Policy</span>.
+          </p>
           <input
             {...register("termcondition", {
               required: "You must accept the terms and conditions to register an account",
@@ -155,27 +158,27 @@ const Form = () => {
           {errors.termcondition.message}
         </small>
       )}
-      <div className="flex flex-col w-full items-center px-2 mt-5 gap-6">
+      <div className="flex flex-col w-full items-center gap-4 mb-6">
         {message && <small className="block text-red-600">{message}</small>}
         <button
           type="submit"
           disabled={isSubmitting}
-          className="text-center flex-1 w-full bg-green-main font-semibold rounded-lg p-[0.7rem] px-4 text-black cursor-pointer"
+          className="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-[#4DF986]"
         >
-          Register
+          <img src='/icons/light.svg' className="invert" />
+          <span className="font-semibold text-base text-black">Get Started</span>
         </button>
-        <p>Other sign up options</p>
-        <GoogleButton />
+        <div className="w-full">
+          <GoogleButton />
+        </div>
       </div>
-      <div className="mt-16">
-        <p className="w-full text-left">
-          Already have an account?
-          <Link
-            href="/login"
-            className="text-green-main underline"
-          > Log in</Link>
-        </p>
-      </div>
+      <p className="font-medium text-[#626D7C] text-center">
+        Already a member?
+        <Link
+          href="/login"
+          className="text-[#4DF986] ml-1"
+        > SIgn In</Link>
+      </p>
       {isSubmitting && <Loader />}
     </form>
   );

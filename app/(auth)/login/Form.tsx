@@ -52,13 +52,15 @@ const Form = () => {
       onSubmit={handleSubmit(formSubmit)}
       className={`${styles.form_container} flex justify-center items-center flex-col`}
     >
-      <h2 className="leading-[1.15] mt-12 mx-auto w-full px-2 text-xl my-6 sm:text-2xl font-bold  font-Poppins">
-        Log In
+      <h2 className="w-full font-semibold text-3xl leading-9 text-white mb-3">
+        Welcome back!
       </h2>
-
-      <fieldset className="w-full px-2 flex justify-center items-center flex-col">
+      <p className="w-full font-medium text-base text-[#626D7C] mb-6">
+        Sign In to access your dashboard and settings.
+      </p>
+      <fieldset className="w-full mb-4">
         <label
-          className="w-full "
+          className="w-full font-semibold text-sm !m-0 !mb-1"
           htmlFor="email"
         >
           Email Address
@@ -69,7 +71,7 @@ const Form = () => {
             required: "Email is required",
             pattern: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
           })}
-          className="p-3 w-full bg-dark-input rounded-lg"
+          className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white px-3 !m-0 focus:border-2 focus:border-[#4DF986]"
           placeholder="Your email"
         />
         {errors.email?.message && (
@@ -78,9 +80,9 @@ const Form = () => {
           </small>
         )}
       </fieldset>
-      <fieldset className="w-full px-2 mt-5 flex justify-center items-center flex-col">
+      <fieldset className="w-full mb-6">
         <label
-          className="w-full"
+          className="w-full font-semibold text-sm !m-0 !mb-1"
           htmlFor="password"
         >
           Password
@@ -90,7 +92,7 @@ const Form = () => {
           {...register("password", {
             required: "Password is required",
           })}
-          className="p-3 w-full bg-dark-input rounded-lg"
+          className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white px-3 !m-0 focus:border-2 focus:border-[#4DF986]"
           placeholder="*********"
         />
         {errors.password?.message && (
@@ -99,38 +101,36 @@ const Form = () => {
           </small>
         )}
       </fieldset>
-      <div className={`flex flex-col justify-center w-full items-center px-2`}>
-        <div className="w-full text-right mt-4 cursor-pointer">
-          <Link href='/forget-password'>Forgot password?</Link>
+      <div className="flex flex-col justify-center w-full items-center mb-4">
+        <div className="w-full text-right cursor-pointer mb-6">
+          <Link href='/forget-password' className="font-medium text-base text-[#4DF986]">
+            Forgot password?
+          </Link>
         </div>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="text-center flex-1 w-full bg-green-main font-semibold rounded-lg p-[0.7rem] px-4 text-black cursor-pointer mt-5"
+          className="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-[#4DF986]"
         >
-          Log in
+          <img src='/icons/login.svg' />
+          <span className="font-semibold text-base text-black">Sign In</span>
         </button>
         {error && (
           <small className="block w-full mt-3 px-2 text-red-600">{error}</small>
         )}
-        <p
-          className={`py-6 text-[#707a8a] text-center ${styles.login_continue}`}
-        >
-          <span className="mr-1 "> Or Login with</span>
-        </p>
       </div>
-      <div className="flex w-full justify-center px-2 text-lg items-center">
+      <div className="w-full mb-6">
         <GoogleButton />
       </div>
-      <div className="mt-16">
-        <p className="text-center">
-          Already have an account?
-          <Link
-            href="/register"
-            className="text-green-main underline"
-          > Sign up</Link>
-        </p>
-      </div>
+      <p className="font-medium text-[#626D7C] text-center">
+        Already have an account?
+        <Link
+          href="/register"
+          className="text-[#4DF986] ml-1"
+        >
+          Sign up
+        </Link>
+      </p>
       {isSubmitting && <Loader />}
     </form>
   );

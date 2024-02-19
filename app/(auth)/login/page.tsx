@@ -7,10 +7,8 @@ export const metadata: Metadata = {
 
 export default function Login() {
   return (
-    <main className="max-w-sm pb-12 mx-auto w-full">
-      <section className="mx-4">
-        <Form />
-      </section>
+    <main className="w-full max-w-[416px] pt-12 pb-20 lg:py-32 mx-auto">
+      <Form />
     </main>
   );
 }

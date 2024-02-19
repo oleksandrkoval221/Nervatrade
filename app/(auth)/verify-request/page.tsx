@@ -8,26 +8,31 @@ export const metadata: Metadata = {
 const VerifyRequest = () => {
 
   return (
-    <section className="mx-auto max-w-sm">
-      <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
-          <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold">
-              Check your email
-            </h2>
-          </div>
-          <div>
-            <p className="text-center">
-              A sign in link has been sent to your email address.
-            </p>
-          </div>
-          <div className="flex justify-center">
-            <Link href="/" className="mt-8 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-black bg-green-main hover:bg-grean-second sm:w-auto">
-                Go to Home
-            </Link>
-          </div>
+    <section className="w-full max-w-[416px] py-12 lg:py-32 mx-auto">
+      <div className="grid gap-6">
+        <div className="grid gap-3">
+          <img src="/icons/email.svg" alt="" />
+          <h2 className="font-semibold text-3xl leading-9 text-[#FFF]">
+            Check your email
+          </h2>
+          <p className="font-semibold text-base text-[#626D7C]">
+            We have sent a password recover instructions to your email.
+          </p>
         </div>
-        </div>
+        <p className="font-medium text-base gap-1 text-[#626D7C]">
+          Didn't receive the email? <span className="text-[#4DF986]">Click to resend</span>
+        </p>
+
+        <Link
+          href="/login"
+          className="w-full h-12 rounded-lg bg-transparent border border-[#343B45] font-semibold text-base text-white flex justify-center items-center gap-2"
+        >
+          <img src="/icons/back.svg" alt="" />
+          <span>
+            Back to sign in
+          </span>
+        </Link>
+      </div>
     </section>
   );
 };

@@ -7,10 +7,8 @@ export const metadata: Metadata = {
 
 export default function ForgetPassword() {
   return (
-    <main className="max-w-sm pb-12 mx-auto w-full">
-      <section className="mx-4">
-        <Form />
-      </section>
+    <main className="w-full max-w-[416px] py-12 lg:py-32 mx-auto">
+      <Form />
     </main>
   );
 }

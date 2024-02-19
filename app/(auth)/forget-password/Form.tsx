@@ -27,7 +27,7 @@ const Form = () => {
     },
   });
 
-  const [btnText, setBtnText] = useState<string | null>("Reset password");
+  const [btnText, setBtnText] = useState<string | null>("Send link to email");
   const [error, setError] = useState<string | null>("");
 
   useEffect(() => {
@@ -39,12 +39,12 @@ const Form = () => {
   }
 
   const formSubmit: SubmitHandler<Inputs> = (form) => {
-    const { email } = form;    
-    axios.post('/api/auth/reset-password-link',{
+    const { email } = form;
+    axios.post('/api/auth/reset-password-link', {
       email
     }).then(res => {
       console.log('res ===>>> ', res.data);
-      if(res.status === 201){
+      if (res.status === 201) {
         setError("");
         setBtnText("Send Again");
       }
@@ -59,13 +59,16 @@ const Form = () => {
       onSubmit={handleSubmit(formSubmit)}
       className={`${styles.form_container} flex justify-center items-center flex-col`}
     >
-      <h2 className="leading-[1.15] mt-12 mx-auto w-full px-2 text-xl my-6 sm:text-2xl font-bold  font-Poppins">
-        Forgot password?
+      <h2 className="w-full font-semibold text-3xl text-[#FFF] leading-9 mb-3">
+        Reset your password
       </h2>
+      <p className="font-medium text-base text-[#626D7C] mb-6">
+        Enter your email and we'll send you a link to reset your password.
+      </p>
 
-      <fieldset className="w-full px-2 flex justify-center items-center flex-col">
+      <fieldset className="w-full mb-6">
         <label
-          className="w-full "
+          className="w-full font-semibold text-sm !m-0 !mb-1"
           htmlFor="email"
         >
           Email Address
@@ -76,8 +79,8 @@ const Form = () => {
             required: "Email is required",
             pattern: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
           })}
-          className="p-3 w-full bg-dark-input rounded-lg"
-          placeholder="Your email"
+          className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white px-3 !m-0 focus:border-2 focus:border-[#4DF986]"
+          placeholder="Enter your email"
         />
         {errors.email?.message && (
           <small className="block text-red-600 w-full">
@@ -89,27 +92,27 @@ const Form = () => {
         <small className="block w-full px-2 text-red-600">{error}</small>
       )}
       {
-        btnText !== "Reset password" && 
+        btnText !== "Send link to email" &&
         <div className="px-2">We've sent a link for reset password to your email</div>
       }
-      <div className={`flex flex-col justify-center w-full items-center px-2`}>
+      <div className={`flex flex-col justify-center w-full items-center mb-4`}>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="text-center flex-1 w-full bg-green-main font-semibold rounded-lg p-[0.7rem] px-4 text-black cursor-pointer mt-5"
+          className="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-[#4DF986] font-semibold text-base text-black"
         >
-            { btnText }
+          {btnText}
         </button>
       </div>
-      <div className="mt-36">
-        <p className="text-center">
-          Remember password &nbsp;
-          <Link
-            href="/login"
-            className="text-green-main underline"
-          >Log In </Link>
-        </p>
-      </div>
+      <Link
+        href="/login"
+        className="w-full h-12 rounded-lg bg-transparent border border-[#343B45] font-semibold text-base text-white flex justify-center items-center gap-2"
+      >
+        <img src="/icons/back.svg" alt="" />
+        <span>
+          Back to sign in
+        </span>
+      </Link>
       {isSubmitting && <Loader />}
     </form>
   );
