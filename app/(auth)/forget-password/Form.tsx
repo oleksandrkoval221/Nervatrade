@@ -71,7 +71,7 @@ const Form = () => {
           className="w-full font-semibold text-sm !m-0 !mb-1"
           htmlFor="email"
         >
-          Email Address
+          Email
         </label>
         <input
           type="email"
@@ -79,7 +79,7 @@ const Form = () => {
             required: "Email is required",
             pattern: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
           })}
-          className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white px-3 !m-0 focus:border-2 focus:border-[#4DF986]"
+          className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white px-3 !m-0 focus:border-2 focus:border-[#4DF986] placeholder:text-[#343B45]"
           placeholder="Enter your email"
         />
         {errors.email?.message && (
@@ -99,7 +99,7 @@ const Form = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-[#4DF986] font-semibold text-base text-black"
+          className="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-[#00DC41] font-semibold text-base text-[#4C5563]"
         >
           {btnText}
         </button>

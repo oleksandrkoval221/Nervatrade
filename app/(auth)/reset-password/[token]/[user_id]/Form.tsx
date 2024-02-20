@@ -66,7 +66,7 @@ const Form = () => {
       className={`${styles.form_container}`}
     >
       <h2 className="font-semibold text-3xl leading-9 text-[#FFF] mb-3">
-        Reset password
+        Create new password
       </h2>
       <p className="font-medium text-base text-[#626D7C] mb-3">
         In order to protect your account, make sure your password:
@@ -81,7 +81,7 @@ const Form = () => {
           className="w-full font-semibold text-sm !m-0 !mb-1"
           htmlFor="password"
         >
-          New password
+          Confirm new password
         </label>
         <input
           type="password"
@@ -102,7 +102,7 @@ const Form = () => {
           className="w-full font-semibold text-sm !m-0 !mb-1"
           htmlFor="password"
         >
-          Confirm new password
+          New password
         </label>
         <input
           type="password"
@@ -125,7 +125,7 @@ const Form = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-[#4DF986] font-semibold text-base text-black"
+          className="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-[#00DC41] font-semibold text-base text-[#4C5563]"
         >
           {btnText}
         </button>

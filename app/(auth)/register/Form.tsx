@@ -131,7 +131,7 @@ const Form = () => {
             })}
             autoComplete="new-password"
             className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white placeholder:text-[#343B45] px-3 !m-0 focus:border-2 focus:border-[#4DF986]"
-            placeholder="********"
+            placeholder="Enter your password"
           />
           {errors.password?.message && (
             <small className="block text-red-600">
@@ -163,7 +163,7 @@ const Form = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-[#4DF986]"
+          className="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-[#00DC41]"
         >
           <img src='/icons/light.svg' className="invert" />
           <span className="font-semibold text-base text-black">Get Started</span>

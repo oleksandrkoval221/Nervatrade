@@ -63,7 +63,7 @@ const Form = () => {
           className="w-full font-semibold text-sm !m-0 !mb-1"
           htmlFor="email"
         >
-          Email Address
+          Email
         </label>
         <input
           type="email"
@@ -71,8 +71,8 @@ const Form = () => {
             required: "Email is required",
             pattern: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
           })}
-          className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white px-3 !m-0 focus:border-2 focus:border-[#4DF986]"
-          placeholder="Your email"
+          className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white px-3 !m-0 focus:border-2 focus:border-[#4DF986] placeholder:text-[#343B45]"
+          placeholder="Enter your email"
         />
         {errors.email?.message && (
           <small className="block text-red-600 w-full">
@@ -92,8 +92,8 @@ const Form = () => {
           {...register("password", {
             required: "Password is required",
           })}
-          className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white px-3 !m-0 focus:border-2 focus:border-[#4DF986]"
-          placeholder="*********"
+          className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white px-3 !m-0 focus:border-2 focus:border-[#4DF986] placeholder:text-[#343B45]"
+          placeholder="Enter your password"
         />
         {errors.password?.message && (
           <small className="block text-red-600 w-full">
@@ -123,7 +123,7 @@ const Form = () => {
         <GoogleButton />
       </div>
       <p className="font-medium text-[#626D7C] text-center">
-        Already have an account?
+        Don't have an account?
         <Link
           href="/register"
           className="text-[#4DF986] ml-1"

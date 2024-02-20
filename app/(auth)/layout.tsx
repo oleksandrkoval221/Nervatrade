@@ -11,7 +11,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NextAuthProvider>
-          <main className="min-h-screen px-3">
+          <main className="min-h-screen px-3 bg-black">
             <div className="w-full max-w-container h-[88px] flex items-center mx-auto lg:px-16 border-b border-b-[#22262E]">
               <Link href="/">
                 <img src="/images/logo-sm.png" alt="" />

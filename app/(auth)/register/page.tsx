@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 const Register = () => {
   return (
-    <section className="w-full max-w-[416px] py-12 lg:py-32 mx-auto">
+    <section className="w-full max-w-[416px] py-12 flex flex-col items-center justify-center mx-auto">
       <h2 className='font-semibold text-3xl leading-9 text-[#FFF] mb-3'>
         Create an account
       </h2>
