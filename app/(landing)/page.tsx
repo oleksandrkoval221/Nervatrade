@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import Button from "@/components/Button";
+import ReactPlayer from 'react-player/youtube'
 
 export const metadata: Metadata = {
   title: "Nervatrade | Home page",
@@ -30,7 +31,7 @@ export default async function Home() {
           </div>
           <div className="relative lg:absolute lg:top-0 lg:right-0 z-0 mb-[78px] lg:mb-0">
             <img src="/images/preview.png" className="scale-75 origin-right" />
-            <iframe src="https://www.youtube.com/watch?v=3-iCDOYkfms" className="w-[120px] lg:w-[200px] h-20 lg:h-[130px] absolute bottom-14 right-20" />
+            <ReactPlayer url="https://www.youtube.com/watch?v=3-iCDOYkfms" className="w-[120px] lg:w-[200px] h-20 lg:h-[130px] absolute bottom-14 right-20" />
           </div>
           <ul className="flex justify-between lg:justify-start lg:gap-16 relative z-10">
             <li className="flex flex-col">  
