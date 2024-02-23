@@ -110,7 +110,7 @@ input {
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 0px;
 }
 
 ::-webkit-scrollbar-track {

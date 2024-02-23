@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 const VerifyRequest = () => {
 
   return (
-    <section className="w-full max-w-[416px] py-12 lg:py-32 mx-auto">
+    <section className="w-full max-w-[416px] mx-auto">
       <div className="grid gap-6">
         <div className="grid gap-3">
           <img src="/icons/email.svg" alt="" />

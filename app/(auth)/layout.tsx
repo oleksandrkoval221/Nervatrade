@@ -17,7 +17,7 @@ export default function RootLayout({
                 <img src="/images/logo-sm.png" alt="" />
               </Link>
             </div>
-            <div style={{ minHeight: 'calc(100vh - 160px)' }}>
+            <div style={{ minHeight: 'calc(100vh - 160px)' }} className="flex flex-col items-center justify-center px-5 py-10">
               {children}
             </div>
             <div className="w-full max-w-container h-[72px] flex items-center mx-auto lg:px-16 border-t border-t-[#22262E]">
