@@ -31,7 +31,7 @@ export default async function Home() {
           </div>
           <div className="relative lg:absolute lg:top-0 lg:right-0 z-0 mb-[78px] lg:mb-0">
             <img src="/images/preview.png" className="scale-75 origin-right" />
-            <ReactPlayer url="https://www.youtube.com/watch?v=3-iCDOYkfms" className="w-[120px] lg:w-[200px] h-20 lg:h-[130px] absolute bottom-14 right-20" />
+            <ReactPlayer url="https://www.youtube.com/embed/3-iCDOYkfms?mute=0&controls=0&origin=https%3A%2F%2Fcookpete.com&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1&widgetid=1" className="w-[120px] lg:w-[200px] h-20 lg:h-[130px] absolute bottom-14 right-20" />
           </div>
           <ul className="flex justify-between lg:justify-start lg:gap-16 relative z-10">
             <li className="flex flex-col">  
