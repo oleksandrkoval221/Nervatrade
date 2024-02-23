@@ -11,15 +11,15 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <main>
-      <div className="mx-auto max-w-container relative px-3 lg:px-16 pt-8 lg:pt-[192px] pb-[42px] lg:pb-[72px]">
+      <div className="mx-auto max-w-container relative px-3 lg:px-16 pt-8 lg:pt-[72px] pb-[42px] lg:pb-[72px]">
         <div className="w-full max-w-[530px] z-10">
-          <h2 className="font-semibold text-[32px] lg:text-[40px] leading-10 lg:leading-[1.3] mb-6 lg:mb-[76px] relative z-10">
+          <h2 className="font-semibold text-[32px] lg:text-[40px] leading-10 lg:leading-[1.3] mb-6 lg:mb-14 relative z-10">
             Professional Grade Crypto Trading Suite
           </h2>
           <p className="font-semibold text-xl lg:text-2xl text-[#626D7C] leading-7 lg:leading-8 mb-6 lg:mb-9 relative z-10">
             Aggregate your trading alpha with Custom Dashboards, Real Time News Terminal and Advanced Charting.
           </p>
-          <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-5 mb-[62px] lg:mb-[208px] relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-5 mb-[62px] lg:mb-40 relative z-10">
             <Button className="w-full lg:w-auto">Start for free</Button>
             <Button className="w-full lg:w-auto" color="dark">
               <div className="flex justify-center items-center gap-2">
@@ -28,9 +28,9 @@ export default async function Home() {
               </div>
             </Button>
           </div>
-          <div className="relative lg:absolute lg:top-24 lg:right-0 z-0 mb-[78px] lg:mb-0">
-            <img src="/images/preview.png" />
-            <iframe src="https://www.youtube.com/watch?v=3-iCDOYkfms" className="w-[120px] lg:w-[200px] h-20 lg:h-[130px] absolute -bottom-10 right-20" />
+          <div className="relative lg:absolute lg:top-0 lg:right-0 z-0 mb-[78px] lg:mb-0">
+            <img src="/images/preview.png" className="scale-75 origin-right" />
+            <iframe src="https://www.youtube.com/watch?v=3-iCDOYkfms" className="w-[120px] lg:w-[200px] h-20 lg:h-[130px] absolute bottom-14 right-20" />
           </div>
           <ul className="flex justify-between lg:justify-start lg:gap-16 relative z-10">
             <li className="flex flex-col">  
