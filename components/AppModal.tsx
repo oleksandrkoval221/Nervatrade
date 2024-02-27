@@ -28,10 +28,10 @@ const AppModal: FC<ModalProps> = ({ children, isOpen, closeModal }) => {
     <>
       {
         isOpen ?
-          <div className="fixed top-0 left-0 w-full z-50 h-screen flex items-center justify-center overflow-x-clip bg-[#0C0B1090]">
-            <div ref={modalRef} className="relative p-4 lg:px-5 -mt-32 max-w-5xl min-w-[365px] bg-dark-modal rounded-lg min-h-[300px]">
-              <div onClick={() => closeModal()} className="cursor-pointer absolute top-4 right-4">
-                <img src="/icons/Close-round.svg" alt="close" />
+          <div className="fixed top-0 left-0 w-full z-50 h-screen flex items-center justify-center overflow-x-clip bg-[#000000CC]">
+            <div ref={modalRef} className="relative p-4 lg:p-6 -mt-16 max-w-5xl min-w-[365px] bg-dark-modal rounded-xl">
+              <div onClick={() => closeModal()} className="cursor-pointer absolute top-6 right-6">
+                <img src="/icons/close.svg" alt="close" />
               </div>
               {children}
             </div>

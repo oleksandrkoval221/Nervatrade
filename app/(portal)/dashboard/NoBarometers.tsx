@@ -1,11 +1,18 @@
 export default function NoBarometers() {
   return (
-    <div className="mx-auto min-h-[calc(100vh-230px)] flex flex-col items-center justify-center text-center">
-      <img src="/images/nobarometers.svg" alt="no barometers"  />
-      <div className="max-w-xl px-5">
-        <h1 className="text-3xl font-bold pt-5 pb-3">No Barometers</h1>
-        <div>Welcome to our dashboard, the central hub for all your data and insights. Here, you'll find a wealth of information at your fingertips, presented in a user-friendly format. Whether you're tracking performance metrics, analyzing trends, or making informed decisions</div>
+    <div className="w-full h-[calc(100vh-96px)] flex items-center justify-center">
+      <div className="w-full max-w-[646px] flex flex-col items-center gap-6 mb-[136px]">
+        <h1 className="font-bold text-[32px] text-center">
+          Create a dashboard
+        </h1>
+        <p className="text-base text-gray-second text-center">
+          Welcome to our dashboard, the central hub for all your data and
+          insights. Here, you'll find a wealth of information at your
+          fingertips, presented in a user-friendly format. Whether you're
+          tracking performance metrics, analyzing trends, or making informed
+          decisions
+        </p>
       </div>
     </div>
-  )
+  );
 }

@@ -16,42 +16,47 @@ export default function Dashboard() {
 
   const handleCreateDashboard = () => {
     setIsOpenModal(true);
-  }
+  };
   const closeModal = () => {
     setIsOpenModal(false);
-  }
+  };
 
   return (
-    <div className="mx-auto w-full md:pl-5">
-      <div className="flex justify-between items-center bg-dark-second rounded-lg h-20 px-6">
-        <h1 className="font-bold">Dashboards</h1>
+    <div className="w-full mx-auto">
+      <div className="w-full h-24 flex items-center justify-between px-6 border-b border-b-gray-border">
+        <h1 className="font-semibold text-[28px] text-[#626D7C]">Dashboards</h1>
         <div className="flex gap-3">
           <button
             onClick={() => handleCreateDashboard()}
-            className="bg-green-main px-3 py-2 rounded text-dark-main hover:scale-105 duration-300">Create a dashboard</button>
+            className="h-12 flex items-center gap-2 bg-[#00DC41] px-3 rounded-lg text-black hover:scale-105 duration-300"
+          >
+            <img src="/icons/plus.svg" alt="" />
+            <span className="font-semibold text-base">Create</span>
+          </button>
         </div>
       </div>
       <div>
-        {
-          dashboards.length ?
-            <DashboardList list={dashboards} setDashboards={setDashboards} />
-            :
-            <NoBarometers />
-        }
-
+        {dashboards.length ? (
+          <DashboardList list={dashboards} setDashboards={setDashboards} />
+        ) : (
+          <NoBarometers />
+        )}
       </div>
 
       <AppModal isOpen={isOpenModal} closeModal={closeModal}>
-        <h2 className="text-2xl font-semibold">
+        <h2 className="font-semibold text-[28px] leading-9 mb-3">
           Create a dashboard
         </h2>
+        <p className="font-medium text-base text-[#626D7C] mb-6">
+          Create a unique name for your dashboard
+        </p>
         <div className="flex flex-col justify-between">
-          <CreateDashboard 
-            user_id={userId} 
-            closeModal={closeModal} 
+          <CreateDashboard
+            user_id={userId}
+            closeModal={closeModal}
             setDashboards={setDashboards}
             dashboards={dashboards}
-            />
+          />
         </div>
       </AppModal>
     </div>

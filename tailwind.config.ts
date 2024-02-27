@@ -16,7 +16,7 @@ const config: Config = {
           main: '#000814',
           second: '#0D111C',
           input: '#001D3D',
-          modal: '#131827',
+          modal: '#0E1217',
           btn: '#1E1C26'
         },
         green: {
@@ -28,7 +28,9 @@ const config: Config = {
         },
         gray: {
           main: '#8C8C8C',
-          second: '#91A7B4'
+          second: '#91A7B4',
+          border: '#22262E',
+          active: '#0E1217'
         },
         white: {
           main: '#FEFEFF'
