@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { Responsive, WidthProvider, Layout } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
-
 import baralist from "@/constants/barometers";
+import { useToggle } from "@/context/SidebarContext";
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive) as any;
 
@@ -19,13 +19,18 @@ export default function GridLayouts({
   setlayout,
   editFlag,
 }: propsType) {
+  // @ts-ignore
+  const { sidebarPin } = useToggle();
   const [compactType, setcompactType] = useState<
     "vertical" | "horizontal" | null
   >("vertical");
   const [mounted, setmounted] = useState(false);
-  const [rowHeight, setRowHeight] = useState((window.innerWidth - 240) / 6 - 1);
+  const [rowHeight, setRowHeight] = useState(
+    (window.innerWidth - (sidebarPin ? 240 : 95)) / 6 - 1
+  );
 
   const [widgetList, setWidgetList] = useState<any>({});
+  const [breakpoint, setBreakpoint] = useState<string>('lg');
 
   useEffect(() => {
     const wList: any = {};
@@ -63,8 +68,13 @@ export default function GridLayouts({
   };
 
   const onBreakpointChange = (newBreakpoint: Breakpoints) => {
-    const containerWidth = window.innerWidth - 240;
-    setRowHeight(containerWidth / cols[newBreakpoint] - 1);
+    setBreakpoint(newBreakpoint);
+  };
+
+  const onWidthChange = (containerWidth: number) => {
+    console.log(containerWidth, breakpoint);
+    // @ts-ignore
+    setRowHeight(containerWidth / cols[breakpoint] - 1);
   };
 
   return (
@@ -92,6 +102,7 @@ export default function GridLayouts({
         resizeHandle={
           <span className="react-resizable-handle !w-10 !h-10 border-b-4 border-r-4 border-b-[#FFF] border-r-[#FFF] absolute right-0 bottom-0 cursor-nwse-resize !bg-none after:!content-none" />
         }
+        onWidthChange={onWidthChange}
       >
         {layout &&
           layout.map((itm, i) => (

@@ -153,44 +153,46 @@ export default function Edit({
       </div>
 
       <div className="relative">
-        <div className="absolute w-full grid gird-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 divide-x divide-y divide-dashed divide-[#7B879E] border-r border-dashed border-r-[#7B879E]">
-          <div className="w-full aspect-square border-dashed border-t border-l border-l-[#7B879E] border-t-[#7B879E]"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-          <div className="w-full aspect-square"></div>
-        </div>
+        {slug.length && slug[1] && (
+          <div className="absolute w-full grid gird-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 divide-x divide-y divide-dashed divide-[#7B879E] border-r border-dashed border-r-[#7B879E]">
+            <div className="w-full aspect-square border-dashed border-t border-l border-l-[#7B879E] border-t-[#7B879E]"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+            <div className="w-full aspect-square"></div>
+          </div>
+        )}
         {layout.length > 0 ? (
           <GridLayouts
             layout={layout}
