@@ -24,7 +24,7 @@ const Form = () => {
   const session = useSession();
 
   if (session.status === "authenticated") {
-    router?.push("/");
+    router?.push("/dashboard");
   }
 
   const {
@@ -36,7 +36,7 @@ const Form = () => {
       email: "",
       username: "",
       password: "",
-      termcondition: false
+      termcondition: false,
     },
   });
 
@@ -56,11 +56,18 @@ const Form = () => {
           password,
         }),
       });
-      res.status === 201 &&
-        signIn("email", { email, callbackUrl: '/dashboard' });
 
-      res.status === 500 &&
-        setMessage(res.statusText);
+      res.status === 201 &&
+        signIn(
+          "credentials",
+          {
+            email,
+            password,
+          },
+          { callbackUrl: "/dashboard" }
+        );
+
+      res.status === 500 && setMessage(res.statusText);
     } catch (err: any) {
       setMessage(err);
     }
@@ -143,13 +150,17 @@ const Form = () => {
       <div className="mb-6">
         <label className="checkbox-container !my-0 !mb-6">
           <p className="font-semibold text-[#626D7C]">
-            Creating an account means you’re okay with our <span className="text-[#4DF986]">Terms of Service</span> and <span className="text-[#4DF986]">Privacy Policy</span>.
+            Creating an account means you’re okay with our{" "}
+            <span className="text-[#4DF986]">Terms of Service</span> and{" "}
+            <span className="text-[#4DF986]">Privacy Policy</span>.
           </p>
           <input
             {...register("termcondition", {
-              required: "You must accept the terms and conditions to register an account",
+              required:
+                "You must accept the terms and conditions to register an account",
             })}
-            type="checkbox" />
+            type="checkbox"
+          />
           <span className="checkmark"></span>
         </label>
       </div>
@@ -165,8 +176,10 @@ const Form = () => {
           disabled={isSubmitting}
           className="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-[#00DC41]"
         >
-          <img src='/icons/light.svg' className="invert" />
-          <span className="font-semibold text-base text-black">Get Started</span>
+          <img src="/icons/light.svg" className="invert" />
+          <span className="font-semibold text-base text-black">
+            Get Started
+          </span>
         </button>
         <div className="w-full">
           <GoogleButton />
@@ -174,10 +187,10 @@ const Form = () => {
       </div>
       <p className="font-medium text-[#626D7C] text-center">
         Already a member?
-        <Link
-          href="/login"
-          className="text-[#4DF986] ml-1"
-        > SIgn In</Link>
+        <Link href="/login" className="text-[#4DF986] ml-1">
+          {" "}
+          SIgn In
+        </Link>
       </p>
       {isSubmitting && <Loader />}
     </form>
