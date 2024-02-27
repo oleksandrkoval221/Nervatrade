@@ -70,17 +70,6 @@ const DashboardList = ({
               <span className="text-white">{dashboard.name}</span>
             </div>
             <div className="flex items-center gap-2.5">
-              {/* <button
-                onClick={(ev) => {
-                  ev.stopPropagation();
-                  deleteRow(dashboard);
-                }}
-                className="min-w-[95px] h-8 flex items-center justify-center rounded-lg px-4 border border-red-main"
-              >
-                <span className="font-semibold text-xs leading-4 text-white">
-                  Delete
-                </span>
-              </button> */}
               <button
                 onClick={(ev) => {
                   ev.stopPropagation();
@@ -98,6 +87,17 @@ const DashboardList = ({
               >
                 <span className="font-semibold text-xs leading-4 text-white">
                   Open
+                </span>
+              </button>
+              <button
+                onClick={(ev) => {
+                  ev.stopPropagation();
+                  deleteRow(dashboard);
+                }}
+                className="min-w-[95px] h-8 flex items-center justify-center rounded-lg px-4 border border-red-main"
+              >
+                <span className="font-semibold text-xs leading-4 text-white">
+                  Delete
                 </span>
               </button>
             </div>
