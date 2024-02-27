@@ -18,6 +18,13 @@ export const POST = async (request: NextRequest) => {
   });
 
   try {
+    const user = await User.findOne({email}).exec();
+    if(user) {
+      return new NextResponse(`Email: ${email} already exists!`, {
+        status: 500,
+        statusText: `Email: ${email} already exists!`
+      });  
+    }
     await newUser.save();
     return new NextResponse("User has been created", {
       status: 201,

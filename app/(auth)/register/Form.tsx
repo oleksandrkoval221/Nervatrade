@@ -57,7 +57,8 @@ const Form = () => {
         }),
       });
 
-      res.status === 201 &&
+        console.log(res);
+        res.status === 201 &&
         signIn(
           "credentials",
           {
@@ -69,6 +70,7 @@ const Form = () => {
 
       res.status === 500 && setMessage(res.statusText);
     } catch (err: any) {
+      console.log(err);
       setMessage(err);
     }
   };
