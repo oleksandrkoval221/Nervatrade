@@ -56,7 +56,8 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
   return (
     <div className="w-full h-full overflow-clip p-6 flex flex-col">
       {/* widget header */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex items-center gap-2 mb-4">
+        <img src="/icons/twitter.svg" className="brightness-0 invert" alt="" />
         <div className="font-semibold text-xl">{widgeTitle || "Feed"}</div>
         {/* <div className="flex gap-2">
           <div className="relative text-sm" ref={dropWrapperRef}>
