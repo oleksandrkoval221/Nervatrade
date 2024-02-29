@@ -20,7 +20,7 @@ const SidebarNav = () => {
       }`}
     >
       <nav className="h-full flex flex-col justify-between">
-        <div className="flex flex-col gap-10 px-4 py-14">
+        <div className="flex flex-col gap-4 px-4 py-6">
           <a href="/" className={`flex cursor-pointer relative z-10`}>
             {!sidebarPin ? (
               <img src="/images/logo-sm.png" className="h-6" alt="logo" />
@@ -56,7 +56,7 @@ const SidebarNav = () => {
           </ul>
         </div>
 
-        <div className="flex flex-col items-center gap-10 px-4 pt-10 pb-14 border-t border-t-gray-border">
+        <div className="flex flex-col items-center gap-10 px-4 pt-10 pb-4 border-t border-t-gray-border">
           <button
             onClick={toggleSidebar}
             className="w-6 h-6 flex justify-center items-center rounded"

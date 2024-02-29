@@ -110,8 +110,8 @@ export default function Edit({
 
   return (
     <div className="w-full mx-auto">
-      <div className="w-full h-24 flex items-center justify-between px-6 border-b border-b-gray-border">
-        <h1 className="flex items-center gap-2 font-semibold text-[28px] leading-9 text-[#626D7C]">
+      <div className="w-full h-16 flex items-center justify-between px-6 border-b border-b-gray-border">
+        <h1 className="flex items-center gap-2 font-medium text-lg text-[#626D7C]">
           <Link href={"/dashboard"}>Dashboards</Link>
           <img src="/icons/arrow-right-gray.svg" />
           <span className="text-[#FFF]">{getDashboardName(dashId) ?? ""}</span>
@@ -122,20 +122,20 @@ export default function Edit({
               <>
                 <button
                   onClick={() => setIsOpenModal(true)}
-                  className="h-12 flex items-center gap-2 rounded-lg border border-[#343B45] pl-3 pr-5 hover:scale-105 duration-300"
+                  className="h-8 flex items-center gap-2 rounded-lg border border-[#343B45] pl-3 pr-5 hover:scale-105 duration-300"
                 >
-                  <img src="/icons/plus.svg" className="invert" alt="" />
-                  <span className="font-semibold text-base">Add barometer</span>
+                  <img src="/icons/plus.svg" className="w-4 invert" alt="" />
+                  <span className="font-semibold text-xs">Add barometer</span>
                 </button>
                 <button
                   onClick={handleCancelDash}
-                  className="h-12 rounded-lg border border-[#343B45] font-semibold text-base px-5 hover:scale-105 duration-300"
+                  className="h-8 rounded-lg border border-[#343B45] font-semibold text-xs px-5 hover:scale-105 duration-300"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSaveDash}
-                  className="bg-[#00DC41] h-12 px-5 rounded-lg font-semibold text-base text-black hover:scale-105 duration-300"
+                  className="bg-[#00DC41] h-8 px-5 rounded-lg font-semibold text-xs text-black hover:scale-105 duration-300"
                 >
                   Save
                 </button>
@@ -143,7 +143,7 @@ export default function Edit({
             ) : (
               <button
                 onClick={handleEditDash}
-                className="h-12 bg-gray-border px-5 rounded-lg font-semibold text-base text-[#FFF] hover:scale-105 duration-300"
+                className="h-8 bg-gray-border px-5 rounded-lg font-sembold text-xs text-[#FFF] hover:scale-105 duration-300"
               >
                 Edit
               </button>

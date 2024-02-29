@@ -23,15 +23,15 @@ export default function Dashboard() {
 
   return (
     <div className="w-full mx-auto">
-      <div className="w-full h-24 flex items-center justify-between px-6 border-b border-b-gray-border">
-        <h1 className="font-semibold text-[28px] text-[#626D7C]">Dashboards</h1>
+      <div className="w-full h-16 flex items-center justify-between px-6 border-b border-b-gray-border">
+        <h1 className="font-medium text-lg text-[#626D7C]">Dashboards</h1>
         <div className="flex gap-3">
           <button
             onClick={() => handleCreateDashboard()}
-            className="h-12 flex items-center gap-2 bg-[#00DC41] px-3 rounded-lg text-black hover:scale-105 duration-300"
+            className="h-8 flex items-center gap-2 bg-[#4DF986] px-3 rounded-lg text-black hover:scale-105 duration-300"
           >
-            <img src="/icons/plus.svg" alt="" />
-            <span className="font-semibold text-base">Create</span>
+            <img src="/icons/plus.svg" className="w-4" alt="" />
+            <span className="font-semibold text-xs">Create</span>
           </button>
         </div>
       </div>

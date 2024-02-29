@@ -34,26 +34,34 @@ const DashboardList = ({
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
-          <div className="bg-dark-modal rounded-lg p-4 px-5">
-            <h1 className="text-2xl text-green-main">Are you sure?</h1>
-            <p className="py-2">
-              You want to delete dashboard - `{dashboard.name}`
+          <div className="bg-dark-modal rounded-lg p-6">
+            <h1 className="font-semibold text-2xl mb-6 text-center">
+              Dashboard deletion
+            </h1>
+            <p className="text-medium text-base mb-8 text-center max-w-[306px]">
+              Are you sure you want to delete "{dashboard.name}" dashboard?
             </p>
-            <button onClick={onClose} className="bg-red-main rounded px-3 py-1">
-              No
-            </button>
-            <button
-              onClick={() => {
-                handleClickDelete(dashboard?._id);
-                onClose();
-              }}
-              className="bg-green-main rounded px-3 py-1 ml-5 text-black"
-            >
-              Yes, Delete it!
-            </button>
+            <div className="flex justify-center items-center gap-4">
+              <button
+                onClick={() => {
+                  handleClickDelete(dashboard?._id);
+                  onClose();
+                }}
+                className="w-[95px] h-8 rounded-lg border border-[#343B45] font-semibold text-xs"
+              >
+                Delete
+              </button>
+              <button
+                onClick={onClose}
+                className="w-[95px] h-8 rounded-lg bg-[#22262E] font-semibold text-xs"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         );
       },
+      overlayClassName: "!bg-black !opacity-80"
     });
   };
 
@@ -94,7 +102,7 @@ const DashboardList = ({
                   ev.stopPropagation();
                   deleteRow(dashboard);
                 }}
-                className="min-w-[95px] h-8 flex items-center justify-center rounded-lg px-4 border border-red-main"
+                className="min-w-[95px] h-8 flex items-center justify-center rounded-lg px-4 border border-[#343B45]"
               >
                 <span className="font-semibold text-xs leading-4 text-white">
                   Delete
