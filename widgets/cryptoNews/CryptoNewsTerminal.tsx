@@ -1,15 +1,34 @@
-'use client';
+"use client";
 
 import "./newsTerminal.css";
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import Moment from 'react-moment';
-
+import Moment from "react-moment";
+import moment from "moment";
 import Pagenation from "@/components/Pagenation";
 
 interface propsType {
   widgeTitle?: string;
 }
+
+moment.updateLocale("en", {
+  relativeTime: {
+    future: "in %s",
+    past: "%s ago",
+    s: "a few seconds",
+    ss: "%d s",
+    m: "1 m",
+    mm: "%d m",
+    h: "1 h",
+    hh: "%d h",
+    d: "1 d",
+    dd: "%d d",
+    M: "1 month",
+    MM: "%d months",
+    y: "1 year",
+    yy: "%d years",
+  },
+});
 
 const CryptoNewsTerminal = ({ widgeTitle }: propsType) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -20,42 +39,50 @@ const CryptoNewsTerminal = ({ widgeTitle }: propsType) => {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const getData = async () => {
-    axios.get('/api/widgets/cryptonews', {
-      params: {
-        currentPage
-      }
-    }).then(({ data }) => {
-      setNewsList(data.results)
-    }).catch((err) => {
-      // console.error(err.message);
-      setApiErr(err.message);
-    })
-  }
+    axios
+      .get("/api/widgets/cryptonews", {
+        params: {
+          currentPage,
+        },
+      })
+      .then(({ data }) => {
+        setNewsList(data.results);
+      })
+      .catch((err) => {
+        // console.error(err.message);
+        setApiErr(err.message);
+      });
+  };
 
   useEffect(() => {
     getData();
-  }, [currentPage])
+  }, [currentPage]);
 
   useEffect(() => {
     function handleClickOutside(event: Event) {
       // @ts-ignore
-      if (dropWrapperRef.current && !dropWrapperRef.current.contains(event.target)) {
+      if (
+        dropWrapperRef.current &&
+        !dropWrapperRef.current.contains(event.target)
+      ) {
         setOpenDropdown(false);
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropWrapperRef]);
 
   return (
-    <div className="w-full h-full overflow-clip">
+    <div className="w-full h-full overflow-clip p-6 flex flex-col">
       {/* widget header */}
-      <div className='flex justify-between items-center px-3 h-[50px]'>
-        <div className='font-semibold'>{widgeTitle || "Nerva News Terminal"}</div>
-        <div className="flex gap-2">
+      <div className="flex justify-between items-center mb-4">
+        <div className="font-semibold text-xl">
+          {widgeTitle || "Latest News"}
+        </div>
+        {/* <div className="flex gap-2">
           <div className="relative text-sm" ref={dropWrapperRef}>
             <button
               onClick={() => setOpenDropdown(!openDropdown)}
@@ -75,71 +102,82 @@ const CryptoNewsTerminal = ({ widgeTitle }: propsType) => {
             }
           </div>
           <div></div>
-        </div>
+        </div> */}
       </div>
       {/* widget body */}
-      <div className="px-3 pt-3 h-[calc(100%-100px)]">
-        <div className="px-3 h-full overflow-y-auto scroll-div">
-          <div className="border-t border-gray-500/50"></div>
-          {
-            newsList.length > 0 && newsList.map((news, i) =>
-              <div key={i} className="text-xs border-b border-gray-500/50 py-3 flex justify-between">
-                <div className="flex gap-3">
-                  <div className="text-gray-500 w-20">
-                    <Moment fromNow>{news.published_at}</Moment>
+      <div className="overflow-y-auto scroll-div">
+        {newsList.length > 0 &&
+          newsList.map((news, i) => (
+            <div
+              key={i}
+              className="text-xs border-b border-gray-500/50 flex justify-between"
+            >
+              <div className="flex">
+                <div className="w-12 flex-shrink-0 font-medium text-base text-[#626D7C] text-center">
+                  <Moment fromNow ago>
+                    {news.published_at}
+                  </Moment>
+                </div>
+                <div className="">
+                  <div className="flex flex-col items-start font-medium text-base">
+                    <div className="text-[#FFF] line-clamp-1">{news.title}</div>
+                    <a
+                      href={news.url}
+                      target="_blank"
+                      className="text-[#626D7C]"
+                    >
+                      {news.domain}
+                    </a>
                   </div>
-                  <div className="">
-                    <div className="flex flex-wrap pb-2">
-                      <div className="pr-2">{`${(news.title).slice(0, 80)} ${news.title.length > 80 ? "..." : ""}`}</div>
-                      <div className="flex gap-1 items-start">
-                        <img src="/icons/Chat.svg" className="mt-1" alt="" />
-                        <a href={news.url} target="_blank" className="text-gray-300">{news.domain}</a>
-                      </div>
-                    </div>
-                    <div className="flex gap-3">
-                      {
-                        news.votes.liked > 0 &&
+                  {/* <div className="flex gap-3">
+                      {news.votes.liked > 0 && (
                         <button className="flex gap-1">
-                          <img src="/icons/Thumb-up.svg" width={14} alt="rise" />
+                          <img
+                            src="/icons/Thumb-up.svg"
+                            width={14}
+                            alt="rise"
+                          />
                           {news.votes.liked}
                         </button>
-                      }
-                      {
-                        news.votes.positive > 0 &&
+                      )}
+                      {news.votes.positive > 0 && (
                         <button className="flex gap-1">
                           <img src="/icons/Rising.svg" width={14} alt="rise" />
                           {news.votes.positive}
                         </button>
-                      }
-                    </div>
-                  </div>
-                </div>
-                <div className="flex gap-1 text-green-main">
-                  {
-                    news.currencies && news?.currencies.map((currency: any, ci: any) =>
-                      <div key={ci}>{currency.code}</div>
-                    )
-                  }
+                      )}
+                    </div> */}
                 </div>
               </div>
-            )
-          }
-          {
-            apiErr && newsList.length === 0 &&
-            <div className="text-center py-5">
-              {apiErr}
-              <div className="underline text-yellow-400 cursor-pointer" onClick={() => getData()}>refresh</div>
+              <div className="flex-shrink-0 font-medium text-base text-right text-[#00823E] px-2 line-clamp-1">
+                {news.currencies &&
+                  news?.currencies
+                    .map((currency: any) => currency.code)
+                    .join(", ")}
+              </div>
             </div>
-          }
-        </div>
+          ))}
+        {apiErr && newsList.length === 0 && (
+          <div className="text-center py-5">
+            {apiErr}
+            <div
+              className="underline text-yellow-400 cursor-pointer"
+              onClick={() => getData()}
+            >
+              refresh
+            </div>
+          </div>
+        )}
       </div>
-      <Pagenation
-        maxPages={10}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      <div className="pt-5">
+        <Pagenation
+          maxPages={10}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default CryptoNewsTerminal;

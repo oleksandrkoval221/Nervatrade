@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react";
 import Pagenation from "@/components/Pagenation";
 import axios from "axios";
+import Moment from "react-moment";
 
 interface propsType {
   widgeTitle?: string;
@@ -19,42 +20,48 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
   useEffect(() => {
     function handleClickOutside(event: Event) {
       // @ts-ignore
-      if (dropWrapperRef.current && !dropWrapperRef.current.contains(event.target)) {
+      if (
+        dropWrapperRef.current &&
+        !dropWrapperRef.current.contains(event.target)
+      ) {
         setOpenDropdown(false);
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [dropWrapperRef]);
 
   const getData = async () => {
-    axios.get('/api/widgets/twittertweets', {
-      params: {
-        "search": "crypto",
-        "limit": 20,
-        "id_only": false
-      }
-    }).then(({ data }) => {
-      setTweets(data)
-    }).catch((err) => {
-      console.error(err.message);
-      setApiErr(err.message);
-    })
-  }
+    axios
+      .get("/api/widgets/twittertweets", {
+        params: {
+          search: "crypto",
+          limit: 20,
+          id_only: false,
+        },
+      })
+      .then(({ data }) => {
+        setTweets(data);
+      })
+      .catch((err) => {
+        console.error(err.message);
+        setApiErr(err.message);
+      });
+  };
 
   useEffect(() => {
     getData();
-  }, [currentPage])
+  }, [currentPage]);
 
   return (
-    <div className="w-full h-full overflow-clip">
+    <div className="w-full h-full overflow-clip p-6 flex flex-col">
       {/* widget header */}
-      <div className='flex justify-between items-center px-3 h-[50px]'>
-        <div className='font-semibold'>{widgeTitle || "Tweets of Twitter Feed"}</div>
-        <div className="flex gap-2">
+      <div className="flex justify-between items-center mb-4">
+        <div className="font-semibold text-xl">{widgeTitle || "Feed"}</div>
+        {/* <div className="flex gap-2">
           <div className="relative text-sm" ref={dropWrapperRef}>
             <button
               onClick={() => setOpenDropdown(!openDropdown)}
@@ -74,37 +81,57 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
             }
           </div>
           <div></div>
-        </div>
+        </div> */}
       </div>
       {/* widget body */}
-      <div className="px-3 pt-3 h-[calc(100%-100px)]">
-        <div className="px-3 h-full overflow-y-auto scroll-div">
-          {
-            tweets.length > 0 && tweets.map((tweet, i) =>
-              <div key={i} className={`flex gap-2 p-3 mb-2 ${i % 2 === 0 && 'bg-dark-modal'}`}>
-                <div className="flex-none w-10 h-10">
-                  <img src={tweet.user.profileImageUrl || `/users/user1.png`} className="w-full h-full rounded-full" alt="avater" />
+      <div className="overflow-y-auto scroll-div">
+        <div className="grid gap-4">
+          {tweets.length > 0 &&
+            tweets.map((tweet, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <div className="flex-none w-10 h-10 m-1">
+                  <img
+                    src={tweet.user.profileImageUrl || `/users/user1.png`}
+                    className="w-full h-full rounded-full"
+                    alt="avater"
+                  />
                 </div>
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h1>{tweet.user.displayname}</h1> <small className="text-gray-300">@{tweet.user.username}</small>
+                <div className="grid gap-2">
+                  <div className="flex items-center gap-6">
+                    <h1 className="font-medium text-base">
+                      {tweet.user.displayname}
+                    </h1>
+                    <div className="flex gap-2 font-medium text-sm text-[#626D7C]">
+                      <span>@{tweet.user.username}</span>
+                      <Moment format="MMM DD">{tweet.date}</Moment>
+                    </div>
                   </div>
-                  <p className="text-xs text-gray-300">{tweet.rawContent}</p>
-                  <div className="flex gap-3 mt-1">
-                    <button className="px-2 pb-1 rounded text-xs bg-dark-btn">Long</button>
-                    <button className="px-2 pb-1 rounded text-xs border border-dark-btn">Short</button>
-                  </div>
+                  <p className="font-medium text-base">{tweet.rawContent}</p>
+                  {/* <div className="flex gap-3 mt-1">
+                  <button className="px-2 pb-1 rounded text-xs bg-dark-btn">
+                    Long
+                  </button>
+                  <button className="px-2 pb-1 rounded text-xs border border-dark-btn">
+                    Short
+                  </button>
+                </div> */}
                 </div>
               </div>
-            )
-          }
-          {
-            apiErr && tweets.length === 0 && <div className="text-center py-5">
-              {apiErr}
-              <div className="underline text-yellow-400 cursor-pointer" onClick={() => getData()}>refresh</div>
-            </div>
-          }
+            ))}
         </div>
+        {apiErr && tweets.length === 0 && (
+          <div className="text-center py-5">
+            {apiErr}
+            <div
+              className="underline text-yellow-400 cursor-pointer"
+              onClick={() => getData()}
+            >
+              refresh
+            </div>
+          </div>
+        )}
+      </div>
+      <div className="pt-5">
         <Pagenation
           maxPages={10}
           currentPage={currentPage}
@@ -112,7 +139,7 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default TwitterFeedWidget;

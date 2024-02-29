@@ -4,31 +4,25 @@ import TwitterFeedWidget from "@/widgets/twitterFeed/TwitterFeedWidget";
 import SettingWidget from "@/widgets/settingWidget/SettingWidget";
 
 export default function NewsTerminal() {
-
   return (
-    <div className="mx-auto w-full md:pl-5">
-      <div className="w-full grid xl:grid-cols-12 gap-4">
-        <div className="xl:col-span-5 xl:h-[calc(100vh-32px)]">
-          <div className="h-[calc(100vh-30px)] rounded-lg bg-dark-second">
-            <CryptoNewsTerminal />
-          </div>
+    <div className="mx-auto w-full h-screen relative">
+      <div className="w-full h-16 px-4 flex items-center border-b border-b-gray-border">
+        <h2 className="font-medium text-lg text-[#626D7C]">News Terminal</h2>
+      </div>
+      <div className="w-full h-full grid xl:grid-cols-12 pt-16 absolute top-0 left-0 right-0 bottom-0">
+        <div className="h-full overflow-auto xl:col-span-4">
+          <CryptoNewsTerminal />
         </div>
-        <div className="xl:col-span-7 grid lg:grid-cols-3 gap-4">
-          <div className="lg:col-span-2">
-            <div className="h-[calc(100vh-30px)]">
-              <div className="h-[calc(100%-198px)] rounded-lg bg-dark-second">
-                <TwitterFeedWidget />
-              </div>
-              <div className="mt-4 rounded-lg bg-dark-second">
-                <SettingWidget />
-              </div>
-            </div>
-          </div>
-          <div className="lg:col-span-1">
-            <div className="h-[calc(100vh-30px)] rounded-lg bg-dark-second">
-              <CryptoPriceAlert />
-            </div>
-          </div>
+        <div className="h-full overflow-auto xl:col-span-5">
+          {/* <div className="h-[calc(100%-198px)] rounded-lg bg-dark-second"> */}
+            <TwitterFeedWidget />
+          {/* </div> */}
+          {/* <div className="mt-4 rounded-lg bg-dark-second">
+            <SettingWidget />
+          </div> */}
+        </div>
+        <div className="h-full overflow-auto xl:col-span-3">
+          <CryptoPriceAlert />
         </div>
       </div>
     </div>
