@@ -61,10 +61,7 @@ const CryptoNewsTerminal = ({ widgeTitle }: propsType) => {
   useEffect(() => {
     function handleClickOutside(event: Event) {
       // @ts-ignore
-      if (
-        dropWrapperRef.current &&
-        !dropWrapperRef.current.contains(event.target)
-      ) {
+      if (dropWrapperRef.current && !dropWrapperRef.current.contains(event.target)) {
         setOpenDropdown(false);
       }
     }
