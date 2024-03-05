@@ -61,7 +61,7 @@ const DashboardList = ({
           </div>
         );
       },
-      overlayClassName: "!bg-black !opacity-80"
+      overlayClassName: "!bg-black !opacity-80",
     });
   };
 
@@ -75,7 +75,11 @@ const DashboardList = ({
           >
             <div className="flex items-center font-medium textbase gap-3">
               <span className="text-[#626D7C]">{i + 1}</span>
-              <span className="text-white">{dashboard.name}</span>
+              <span className="text-white">
+                {dashboard.name.length > 30
+                  ? dashboard.name.slice(0, 30) + "..."
+                  : dashboard.name}
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <button
