@@ -44,10 +44,10 @@ export default function Dashboard() {
       </div>
 
       <AppModal isOpen={isOpenModal} closeModal={closeModal}>
-        <h2 className="font-semibold text-[28px] leading-9 mb-3">
+        <h2 className="font-semibold text-2xl leading-8 mb-3">
           Create a dashboard
         </h2>
-        <p className="font-medium text-base text-[#626D7C] mb-6">
+        <p className="font-medium text-sm text-white mb-2">
           Create a unique name for your dashboard
         </p>
         <div className="flex flex-col justify-between">

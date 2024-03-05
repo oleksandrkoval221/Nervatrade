@@ -20,22 +20,22 @@ const Coin = ({
 }: propsType) => {
   return (
     <div className="text-sm py-2 border-b border-[#343B45]">
-      <div className="flex flex-wrap justify-between items-center gap-3">
-        <div className="flex items-center gap-4">
-          <img src={image} width={30} alt="crypto" />
-          <div className="flex flex-col gap-2 font-medium text-sm">
+      <div className="flex fle-col items-center gap-3">
+        <img src={image} width={30} className="flex-shrink-0" alt="crypto" />
+        <div className="w-full grid gap-1">
+          <div className="flex items-center justify-between font-medium text-sm">
             <h1 className="uppercase">{symbol}</h1>
-            <h1 className="text-[#626D7C]">{name}</h1>
+            <div>${price.toLocaleString()}</div>
           </div>
-        </div>
-        <div className="text-right flex flex-col gap-2 font-medium text-sm">
-          <div>${price.toLocaleString()}</div>
-          <div>
-            {priceChange < 0 ? (
-              <p className="red">{priceChange.toFixed(2)}%</p>
-            ) : (
-              <p className="text-[#00823E]">{priceChange.toFixed(2)}%</p>
-            )}
+          <div className="flex items-center justify-between">
+            <h1 className="text-[#626D7C]">{name}</h1>
+            <div>
+              {priceChange < 0 ? (
+                <p className="red">{priceChange.toFixed(2)}%</p>
+              ) : (
+                <p className="text-[#00823E]">{priceChange.toFixed(2)}%</p>
+              )}
+            </div>
           </div>
         </div>
       </div>

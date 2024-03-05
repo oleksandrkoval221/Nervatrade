@@ -35,10 +35,10 @@ const DashboardList = ({
       customUI: ({ onClose }) => {
         return (
           <div className="bg-dark-modal rounded-lg p-6">
-            <h1 className="font-semibold text-2xl mb-6 text-center">
+            <h1 className="font-semibold text-xl leading-7 mb-2 text-center">
               Dashboard deletion
             </h1>
-            <p className="text-medium text-base mb-8 text-center max-w-[306px]">
+            <p className="text-medium text-sm mb-6 text-center max-w-[306px]">
               Are you sure you want to delete "{dashboard.name}" dashboard?
             </p>
             <div className="flex justify-center items-center gap-4">
@@ -77,7 +77,18 @@ const DashboardList = ({
               <span className="text-[#626D7C]">{i + 1}</span>
               <span className="text-white">{dashboard.name}</span>
             </div>
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
+              <button
+                onClick={(ev) => {
+                  ev.stopPropagation();
+                  deleteRow(dashboard);
+                }}
+                className="min-w-[95px] h-8 flex items-center justify-center rounded-lg px-4 border border-[#343B45]"
+              >
+                <span className="font-semibold text-xs leading-4 text-white">
+                  Delete
+                </span>
+              </button>
               <button
                 onClick={(ev) => {
                   ev.stopPropagation();
@@ -95,17 +106,6 @@ const DashboardList = ({
               >
                 <span className="font-semibold text-xs leading-4 text-white">
                   Open
-                </span>
-              </button>
-              <button
-                onClick={(ev) => {
-                  ev.stopPropagation();
-                  deleteRow(dashboard);
-                }}
-                className="min-w-[95px] h-8 flex items-center justify-center rounded-lg px-4 border border-[#343B45]"
-              >
-                <span className="font-semibold text-xs leading-4 text-white">
-                  Delete
                 </span>
               </button>
             </div>

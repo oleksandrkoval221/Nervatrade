@@ -6,11 +6,8 @@ export default function NoBarometers() {
           Create a dashboard
         </h1>
         <p className="text-base text-gray-second text-center">
-          Welcome to our dashboard, the central hub for all your data and
-          insights. Here, you'll find a wealth of information at your
-          fingertips, presented in a user-friendly format. Whether you're
-          tracking performance metrics, analyzing trends, or making informed
-          decisions
+          Welcome to dashboards, from here you will be able to create, pin and
+          store your favourite barometers and widgets.
         </p>
       </div>
     </div>

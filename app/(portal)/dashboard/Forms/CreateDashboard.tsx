@@ -52,7 +52,7 @@ const CreateDashboard = ({
   return (
     <form
       onSubmit={handleSubmit(formSubmit)}
-      className="w-full flex flex-col gap-6 sm:w-[450px] lg:w-[570px]"
+      className="w-full flex flex-col gap-4 sm:w-[450px] lg:w-[570px]"
     >
       <fieldset className="w-full flex justify-center items-center flex-col">
         <input
@@ -60,7 +60,7 @@ const CreateDashboard = ({
           {...register("dashboardName", {
             required: "Dashboard Name is required",
           })}
-          className="w-full h-12 bg-[#151A1F] border border-[#343B45] rounded-lg font-medium text-base text-white px-3 !m-0 focus:border-2 focus:border-[#4DF986] placeholder:text-[#343B45]"
+          className="w-full h-9 border border-[#343B45] rounded font-medium text-sm text-white px-2 !m-0 focus:border-2 focus:border-[#4DF986] placeholder:text-[#343B45]"
           placeholder="Enter a dashboard name"
         />
         {errors.dashboardName?.message && (
@@ -72,20 +72,20 @@ const CreateDashboard = ({
       {error && (
         <small className="block w-full px-2 text-red-600">{error}</small>
       )}
-      <div className="flex gap-4">
-        <button
-          type="button"
-          className="w-full h-12 border border-[#343B45] rounded-lg"
-          onClick={closeModal}
-        >
-          <span className="font-semibold text-base text-white">Cancel</span>
-        </button>
+      <div className="flex justify-end gap-4">
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full h-12 rounded-lg bg-[#00DC41]"
+          className="w-[120px] h-8 flex items-center justify-center rounded-lg bg-[#00DC41]"
         >
-          <span className="font-semibold text-base text-black">Create</span>
+          <span className="font-semibold text-xs text-black">Create</span>
+        </button>
+        <button
+          type="button"
+          className="w-[120px] h-8 flex items-center justify-center border border-[#343B45] rounded-lg"
+          onClick={closeModal}
+        >
+          <span className="font-semibold text-xs text-white">Cancel</span>
         </button>
       </div>
     </form>

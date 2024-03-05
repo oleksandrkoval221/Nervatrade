@@ -29,8 +29,8 @@ const CryptoPriceAlert = ({ widgeTitle }: propsType) => {
   return (
     <div className="w-full h-full overflow-clip flex flex-col p-6 pb-[60px]">
       {/* widget header */}
-      <div className="flex justify-between items-center mb-4">
-        <div className="font-semibold text-xl">
+      <div className="flex justify-between items-center mb-6">
+        <div className="font-medium text-base">
           {widgeTitle || "Crypto Prices "}
         </div>
       </div>

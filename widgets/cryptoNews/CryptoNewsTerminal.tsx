@@ -75,8 +75,8 @@ const CryptoNewsTerminal = ({ widgeTitle }: propsType) => {
   return (
     <div className="w-full h-full overflow-clip p-6 flex flex-col">
       {/* widget header */}
-      <div className="flex justify-between items-center mb-4">
-        <div className="font-semibold text-xl">
+      <div className="flex justify-between items-center mb-6">
+        <div className="font-medium text-base">
           {widgeTitle || "Latest News"}
         </div>
         {/* <div className="flex gap-2">
@@ -110,13 +110,13 @@ const CryptoNewsTerminal = ({ widgeTitle }: propsType) => {
               className="text-xs border-b border-gray-500/50 flex justify-between py-2"
             >
               <div className="flex">
-                <div className="w-12 flex-shrink-0 font-medium text-base text-[#626D7C] text-center">
+                <div className="w-12 flex-shrink-0 font-medium text-sm text-[#626D7C] text-center">
                   <Moment fromNow ago>
                     {news.published_at}
                   </Moment>
                 </div>
                 <div className="">
-                  <div className="flex flex-col items-start font-medium text-base">
+                  <div className="flex flex-col items-start font-medium text-sm">
                     <div className="text-[#FFF] line-clamp-1">{news.title}</div>
                     <a
                       href={news.url}

@@ -122,3 +122,24 @@ input {
     border-radius: 8px;
     background: #8FFE09;
 }
+
+:root {
+    --toastify-color-light: #000 !important;
+    --toastify-toast-width: 390px!important;
+    --toastify-toast-min-height: 80px!important;
+    --toastify-font-family: "Manrope", sans-serif !important;
+    --toastify-text-color-light: #626D7C !important;
+}
+
+.Toastify__toast {
+    font-weight: 600!important;
+    font-size: 20px!important;
+}
+
+.Toastify__close-button {
+    opacity: 1 !important;
+}
+
+.Toastify__close-button svg {
+    fill: #626D7C!important;
+}

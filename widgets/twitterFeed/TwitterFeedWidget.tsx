@@ -57,9 +57,9 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
   return (
     <div className="w-full h-full overflow-clip p-6 flex flex-col">
       {/* widget header */}
-      <div className="flex items-center gap-2 mb-4">
-        <img src="/icons/twitter.svg" className="brightness-0 invert" alt="" />
-        <div className="font-semibold text-xl">{widgeTitle || "Feed"}</div>
+      <div className="flex items-center gap-2 mb-6">
+        <img src="/icons/twitter.svg" className="w-6 h-6 brightness-0 invert" alt="" />
+        <div className="font-medium text-base">{widgeTitle || "Feed"}</div>
         {/* <div className="flex gap-2">
           <div className="relative text-sm" ref={dropWrapperRef}>
             <button
@@ -88,7 +88,7 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
           {tweets.length > 0 &&
             tweets.map((tweet, i) => (
               <div key={i} className="flex items-start gap-2 py-4">
-                <div className="flex-none w-10 h-10 m-1">
+                <div className="flex-none w-[30px] h-[30px]">
                   <img
                     src={tweet.user.profileImageUrl || `/users/user1.png`}
                     className="w-full h-full rounded-full"
@@ -97,7 +97,7 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center gap-6">
-                    <h1 className="font-medium text-base">
+                    <h1 className="font-medium text-sm">
                       {tweet.user.displayname}
                     </h1>
                     <div className="flex gap-2 font-medium text-sm text-[#626D7C]">
@@ -105,7 +105,7 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
                       <Moment format="MMM DD">{tweet.date}</Moment>
                     </div>
                   </div>
-                  <p className="font-medium text-base">{tweet.rawContent}</p>
+                  <p className="font-medium text-sm">{tweet.rawContent}</p>
                   {/* <div className="flex gap-3 mt-1">
                   <button className="px-2 pb-1 rounded text-xs bg-dark-btn">
                     Long
