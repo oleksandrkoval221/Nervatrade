@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import axios from "axios";
@@ -16,6 +17,7 @@ export default function Edit({
 }: {
   params: { slug: any[] };
 }) {
+  const router = useRouter();
   const { data: session } = useSession();
   // @ts-ignore
   const { getDashboardName } = useToggle();
@@ -26,7 +28,6 @@ export default function Edit({
     setIsOpenModal(false);
   };
 
-  const [btnFlag, setBtnFlag] = useState(false);
   const [editFlag, setEditFlag] = useState(false);
   const [editedWidgets, setEditedWidgets] = useState<any[]>([]);
   const [layout, setlayout] = useState<any[]>([]);
@@ -43,12 +44,12 @@ export default function Edit({
       .then((res) => {
         if (res.status === 200) {
           toast("Layout has been saved.", { type: "success" });
+          router.push(`/dashboard/${slug[0]}`);
         }
       })
       .catch((err) => {
         toast(err?.response?.data, { type: "error" });
       });
-    setEditFlag(false);
   };
 
   const getDashLayout = () => {
@@ -59,7 +60,6 @@ export default function Edit({
         if (res.status === 200 && res.data) {
           const { layout } = res.data;
           setlayout(layout);
-          setBtnFlag(true);
         }
       })
       .catch((err) => {
@@ -69,7 +69,7 @@ export default function Edit({
 
   // handle edit dash action
   const handleEditDash = () => {
-    setEditFlag(true);
+    router.push(`/dashboard/${slug[0]}/edit`);
   };
 
   // handle cancel editable dash action
@@ -99,7 +99,6 @@ export default function Edit({
 
     setlayout(newLayout);
     setEditFlag(true);
-    setBtnFlag(true);
     closeModal();
   };
 
@@ -107,6 +106,12 @@ export default function Edit({
     if (!session) return;
     getDashLayout();
   }, [session]);
+
+  useEffect(() => {
+    if (slug[1] && slug[1] === "edit") {
+      setEditFlag(true);
+    }
+  }, [slug]);
 
   return (
     <div className="w-full mx-auto">
@@ -116,7 +121,7 @@ export default function Edit({
           <img src="/icons/arrow-right-gray.svg" />
           <span className="text-[#FFF]">{getDashboardName(dashId) ?? ""}</span>
         </h1>
-        {slug.length && slug[1] && (
+        {slug && (
           <div className="flex gap-3">
             {editFlag ? (
               <>
