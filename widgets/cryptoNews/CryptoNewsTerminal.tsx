@@ -107,7 +107,7 @@ const CryptoNewsTerminal = ({ widgeTitle }: propsType) => {
           newsList.map((news, i) => (
             <div
               key={i}
-              className="text-xs border-b border-gray-500/50 flex justify-between"
+              className="text-xs border-b border-gray-500/50 flex justify-between py-2"
             >
               <div className="flex">
                 <div className="w-12 flex-shrink-0 font-medium text-base text-[#626D7C] text-center">

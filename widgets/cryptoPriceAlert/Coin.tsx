@@ -23,14 +23,14 @@ const Coin = ({
       <div className="flex flex-wrap justify-between items-center gap-3">
         <div className="flex items-center gap-4">
           <img src={image} width={30} alt="crypto" />
-          <div className="flex flex-col gap-2">
-            <h1 className="font-medium text-sm uppercase">{symbol}</h1>
-            <h1 className="font-medium text-xs text-[#626D7C]">{name}</h1>
+          <div className="flex flex-col gap-2 font-medium text-sm">
+            <h1 className="uppercase">{symbol}</h1>
+            <h1 className="text-[#626D7C]">{name}</h1>
           </div>
         </div>
-        <div className="text-right flex flex-col gap-2">
-          <div className="font-medium text-sm">${price.toLocaleString()}</div>
-          <div className="font-medium text-xs">
+        <div className="text-right flex flex-col gap-2 font-medium text-sm">
+          <div>${price.toLocaleString()}</div>
+          <div>
             {priceChange < 0 ? (
               <p className="red">{priceChange.toFixed(2)}%</p>
             ) : (

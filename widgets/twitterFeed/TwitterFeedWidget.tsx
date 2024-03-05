@@ -35,6 +35,7 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
     axios
       .get("/api/widgets/twittertweets", {
         params: {
+          username: 'tier10k',
           search: "crypto",
           limit: 20,
           id_only: false,
@@ -83,10 +84,10 @@ const TwitterFeedWidget = ({ widgeTitle }: propsType) => {
       </div>
       {/* widget body */}
       <div className="overflow-y-auto scroll-div">
-        <div className="grid gap-4">
+        <div className="grid divide-y divide-gray-border">
           {tweets.length > 0 &&
             tweets.map((tweet, i) => (
-              <div key={i} className="flex items-center gap-2">
+              <div key={i} className="flex items-start gap-2 py-4">
                 <div className="flex-none w-10 h-10 m-1">
                   <img
                     src={tweet.user.profileImageUrl || `/users/user1.png`}
