@@ -6,7 +6,7 @@ export default [
     iconHover: 'Home-hover'
   },{
     href: '/news-terminal',
-    title: 'News terminal',
+    title: 'News Terminal',
     icon: 'News-thin',
     iconHover: 'News-thin-hover'
   },{
