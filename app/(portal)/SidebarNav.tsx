@@ -65,7 +65,9 @@ const SidebarNav = () => {
         >
           <button
             onClick={toggleSidebar}
-            className={`w-full flex items-center gap-2 rounded ${sidebarPin ? `justify-center` : ``}`}
+            className={`w-full flex items-center gap-2 rounded ${
+              sidebarPin ? `justify-center` : ``
+            }`}
           >
             <div className="w-6 h-6 flex items-center justify-center">
               <img
@@ -87,7 +89,9 @@ const SidebarNav = () => {
           <a
             href="#"
             onClick={() => signOut()}
-            className={`flex items-center w-full h-14 gap-2 rounded-lg cursor-pointer ${sidebarPin ? `justify-center` : ``}`}
+            className={`flex items-center w-full h-14 gap-2 rounded-lg cursor-pointer ${
+              sidebarPin ? `justify-center` : ``
+            }`}
             onMouseOver={() => setMunuOver("logout")}
             onMouseLeave={() => setMunuOver("")}
           >
