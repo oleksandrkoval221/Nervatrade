@@ -1,7 +1,6 @@
 "use client";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { BsPersonFill } from "react-icons/bs";
 import Button from "../Button";
 
 const DesktopNav = () => {
@@ -27,7 +26,10 @@ const DesktopNav = () => {
 
       <ul className="flex gap-8 font-semibold text-base">
         {links.map((link, i) => (
-          <li key={i} className="text-[#626D7C] text-sm hover:text-[#FFF] transition">
+          <li
+            key={i}
+            className="text-[#626D7C] text-sm hover:text-[#FFF] transition"
+          >
             <Link href={link.path}>{link.label}</Link>
           </li>
         ))}
@@ -35,10 +37,15 @@ const DesktopNav = () => {
 
       <div>
         {session ? (
-          <div className="flex items-center gap-2" onClick={() => signOut()}>
+          <Link
+            href="/profile"
+            className="flex items-center gap-2 cursor-pointer"
+          >
             <img src="/icons/user.svg" className="w-4 opacity-50" alt="" />
-            <span className="font-medium text-xs text-[#626D7C]">{session.user?.email}</span>
-          </div>
+            <span className="font-medium text-xs text-[#626D7C]">
+              {session.user?.email}
+            </span>
+          </Link>
         ) : (
           <div className="flex gap-5">
             <Link href="/login">
