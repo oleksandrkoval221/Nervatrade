@@ -1,17 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import axios from "axios";
 import { usePathname } from "next/navigation";
 import menuItems from "./menuItems";
+import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { useToggle } from "@/context/SidebarContext";
 
+type User = {
+  _id: String;
+  username: String;
+  email: String;
+  password: String;
+  updatedAt: Date;
+};
+
 const SidebarNav = () => {
+  const session = useSession();
+  const [user, setUser] = useState<User | null>();
   const pathname = usePathname();
   // @ts-ignore
   const { sidebarPin, toggleSidebar } = useToggle();
   const [menuOver, setMunuOver] = useState("");
+
+  const getProfile = () => {
+    if (session.data) {
+      // @ts-ignore
+      axios.get(`api/profile/get?id=${session.data.user._id}`).then((res) => {
+        setUser(res.data);
+      });
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, [session]);
 
   return (
     <aside
@@ -92,13 +117,13 @@ const SidebarNav = () => {
               sidebarPin ? `justify-center` : ``
             }`}
           >
-            <div className="w-12 h-12 flex items-center justify-center rounded-full">
+            <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full">
               <img src="/images/logo-white-1.png" alt="" />
             </div>
             {!sidebarPin && (
               <div className="flex flex-col font-medium">
-                <span className="text-base">John Doe</span>
-                <span className="text-sm text-[#626D7C]">john@nerva.pro</span>
+                <span className="text-base">{user?.username}</span>
+                <span className="text-sm text-[#626D7C]">{user?.email}</span>
               </div>
             )}
           </Link>
