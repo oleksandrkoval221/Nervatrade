@@ -16,6 +16,7 @@ const MobileNav = () => {
     { label: "Partners", path: "/" },
     { label: "Pricing", path: "/" },
     { label: "News", path: "/" },
+    { label: "App", path: "/" },
   ];
 
   return (
