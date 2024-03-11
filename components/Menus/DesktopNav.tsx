@@ -49,10 +49,14 @@ const DesktopNav = () => {
         ) : (
           <div className="flex gap-5">
             <Link href="/login">
-              <Button color="dark">Sign In</Button>
+              <button className="h-8 px-4 font-semibold text-xs rounded-lg border border-gray-border text-[#FFF]">
+                Sign In
+              </button>
             </Link>
             <Link href="/register">
-              <Button color="primary">Sign Up</Button>
+              <button className="h-8 px-4 font-semibold text-xs rounded-lg bg-[#00DC41] text-[#000]">
+                Sign Up
+              </button>
             </Link>
           </div>
         )}
