@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import moment from "moment";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
@@ -13,6 +14,7 @@ type User = {
   username: String;
   email: String;
   password: String;
+  updatedAt: Date;
 };
 
 export default function Profile() {
@@ -24,16 +26,16 @@ export default function Profile() {
   const [openedPasswordModal, setOpenedPasswordModal] =
     useState<boolean>(false);
   const getProfile = () => {
-    // @ts-ignore
-    axios.get(`api/profile/get?id=${session.data.user._id}`).then((res) => {
-      setUser(res.data);
-    });
+    if (session.data) {
+      // @ts-ignore
+      axios.get(`api/profile/get?id=${session.data.user._id}`).then((res) => {
+        setUser(res.data);
+      });
+    }
   };
 
   useEffect(() => {
-    if (session.data) {
-      getProfile();
-    }
+    getProfile();
   }, [session]);
 
   return (
@@ -42,27 +44,25 @@ export default function Profile() {
         <div className="w-full h-16 flex items-center justify-between px-6 border-b border-b-gray-border">
           <h1 className="font-medium text-lg text-[#626D7C]">Profile</h1>
         </div>
-        <div className="px-7">
-          <div className="w-full h-[170px] bg-gray-border rounded" />
-          <div className="flex flex-col items-center gap-[100px]">
-            <div className="w-full grid gap-7 -mt-[60px]">
+        <div className="px-5 md:px-7">
+          <div className="w-full h-20 md:h-[170px] bg-gray-border rounded" />
+          <div className="flex flex-col items-center gap-5 md:gap-[100px]">
+            <div className="w-full grid gap-7 -mt-10 md:-mt-[60px]">
               <div className="flex flex-col items-center">
-                <img
-                  src="/images/logo-white-1.png"
-                  className="w-[120px] h-[120px] rounded-full border-2 border-[#00DC41] mb-6"
-                  alt=""
-                />
-                <span className="font-semibold text-2xl text-white mb-4">
+                <div className="flex items-center justify-center bg-gray-border w-20 h-20 md:w-[120px] md:h-[120px] rounded-full border-2 border-[#00DC41] mb-4 md:mb-6">
+                  <img src="/images/logo-white-1.png" alt="" />
+                </div>
+                <span className="font-semibold text-2xl text-white mb-2 md:mb-4">
                   {user?.username}
                 </span>
                 <span className="font-medium text-lg text-[#626D7C]">
                   {user?.email}
                 </span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-[50px]">
-                <div className="border border-gray-border rounded px-7 py-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-[50px]">
+                <div className="border border-gray-border rounded px-5 py-4 md:px-7 md:py-6">
                   <div className="grid gap-2 pb-6 border-b border-b-gray-border">
-                    <p className="font-medium text-xl leading-[34px]]">
+                    <p className="font-medium text-xl leading-[34px]">
                       Basic Information
                     </p>
                     <p className="font-medium text-sm leading-5">
@@ -70,7 +70,7 @@ export default function Profile() {
                     </p>
                   </div>
                   <div className="font-medium text-sm">
-                    <div className="h-14 flex items-center justify-between border-b border-b-gray-border">
+                    <div className="h-10 md:h-14 flex items-center justify-between border-b border-b-gray-border">
                       <div className="flex items-center gap-6">
                         <span className="inline-block w-[70px] text-[#626D7C]">
                           Username
@@ -84,7 +84,7 @@ export default function Profile() {
                         alt=""
                       />
                     </div>
-                    <div className="h-14 flex items-center justify-between">
+                    <div className="h-10 md:h-14 flex items-center justify-between">
                       <div className="flex items-center gap-6">
                         <span className="inline-block w-[70px] text-[#626D7C]">
                           Email
@@ -101,7 +101,7 @@ export default function Profile() {
                     </div>
                   </div>
                 </div>
-                <div className="border border-gray-border rounded px-7 py-6">
+                <div className="border border-gray-border rounded px-5 py-4 md:px-7 md:py-6">
                   <div className="grid gap-2 pb-6 border-b border-b-gray-border">
                     <p className="font-medium text-xl leading-[34px]]">
                       Password
@@ -111,7 +111,7 @@ export default function Profile() {
                     </p>
                   </div>
                   <div className="font-medium text-sm">
-                    <div className="h-14 flex items-center justify-between">
+                    <div className="h-10 md:h-14 flex items-center justify-between">
                       <div className="flex items-center gap-6">
                         <span className="inline-block w-[70px]">
                           ****************
@@ -125,7 +125,8 @@ export default function Profile() {
                       />
                     </div>
                     <div className="flex items-center justify-between text-[#626D7C]">
-                      Last changed 23.12.2023
+                      Last changed{" "}
+                      {moment(user?.updatedAt).format("DD.MM.YYYY")}
                     </div>
                   </div>
                 </div>

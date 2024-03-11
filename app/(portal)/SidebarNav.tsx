@@ -86,27 +86,22 @@ const SidebarNav = () => {
               Collapse
             </span>
           </button>
-          <a
-            href="#"
-            onClick={() => signOut()}
-            className={`flex items-center w-full h-14 gap-2 rounded-lg cursor-pointer ${
+          <Link
+            href="/profile"
+            className={`flex items-center w-full h-14 gap-4 rounded-lg cursor-pointer ${
               sidebarPin ? `justify-center` : ``
             }`}
-            onMouseOver={() => setMunuOver("logout")}
-            onMouseLeave={() => setMunuOver("")}
           >
-            <img
-              src={`/icons/${
-                menuOver === "logout" ? "Turnoff-hover" : "Turnoff"
-              }.svg`}
-              alt="logout"
-            />
+            <div className="w-12 h-12 flex items-center justify-center rounded-full">
+              <img src="/images/logo-white-1.png" alt="" />
+            </div>
             {!sidebarPin && (
-              <span className="font-semibold text-base text-[#626D7C]">
-                Logout
-              </span>
+              <div className="flex flex-col font-medium">
+                <span className="text-base">John Doe</span>
+                <span className="text-sm text-[#626D7C]">john@nerva.pro</span>
+              </div>
             )}
-          </a>
+          </Link>
         </div>
       </nav>
     </aside>
