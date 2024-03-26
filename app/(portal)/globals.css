@@ -125,15 +125,21 @@ input {
 
 :root {
     --toastify-color-light: #000 !important;
-    --toastify-toast-width: 390px!important;
-    --toastify-toast-min-height: 80px!important;
+    --toastify-toast-width: 320px!important;
+    --toastify-toast-min-height: 40px!important;
     --toastify-font-family: "Manrope", sans-serif !important;
     --toastify-text-color-light: #626D7C !important;
 }
 
 .Toastify__toast {
-    font-weight: 600!important;
-    font-size: 20px!important;
+    font-weight: 500!important;
+    font-size: 16px!important;
+    background: #22262E!important;
+}
+
+.Toastify__toast-icon {
+    width: 18px!important;
+    margin-right: 8px!important;;
 }
 
 .Toastify__close-button {

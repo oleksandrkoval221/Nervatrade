@@ -38,7 +38,7 @@ export default async function RootLayout({
             </div>
           </SidebarContext>
         </NextAuthProvider>
-        <ToastContainer />
+        <ToastContainer autoClose={50000} />
       </body>
     </html>
   );

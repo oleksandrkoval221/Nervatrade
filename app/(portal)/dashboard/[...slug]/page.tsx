@@ -111,6 +111,9 @@ export default function Edit({
     if (slug[1] && slug[1] === "edit") {
       setEditFlag(true);
     }
+    if (slug[2] && slug[2] === "new") {
+      setIsOpenModal(true);
+    }
   }, [slug]);
 
   return (

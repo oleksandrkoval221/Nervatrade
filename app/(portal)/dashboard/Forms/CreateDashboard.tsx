@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -18,6 +19,7 @@ const CreateDashboard = ({
   setDashboards: any;
   dashboards: any[];
 }) => {
+  const router = useRouter();
   const [error, setError] = useState<string | null>("");
 
   const {
@@ -42,6 +44,7 @@ const CreateDashboard = ({
           setDashboards([...dashboards, res.data]);
           toast("A new dashboard has been created", { type: "success" });
           closeModal();
+          router.push(`/dashboard/${res.data._id}/edit/new`);
         }
       })
       .catch((err) => {
