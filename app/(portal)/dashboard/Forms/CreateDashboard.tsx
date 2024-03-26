@@ -42,7 +42,7 @@ const CreateDashboard = ({
       .then((res) => {
         if (res.status === 200) {
           setDashboards([...dashboards, res.data]);
-          toast("A new dashboard has been created", { type: "success" });
+          toast("Dashboard created.", { type: "success" });
           closeModal();
           router.push(`/dashboard/${res.data._id}/edit/new`);
         }

@@ -43,7 +43,7 @@ export default function Edit({
       })
       .then((res) => {
         if (res.status === 200) {
-          toast("Layout has been saved.", { type: "success" });
+          toast("Layout saved.", { type: "success" });
           router.push(`/dashboard/${slug[0]}`);
         }
       })
