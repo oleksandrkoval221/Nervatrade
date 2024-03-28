@@ -1,0 +1,5 @@
+select {
+  appearance: none;
+  padding-right: 32px !important;
+  background: url("/icons/arrow-down.svg") no-repeat calc(100% - 10px) !important;
+}

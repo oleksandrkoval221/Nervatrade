@@ -1,5 +1,5 @@
 "use client";
-
+import "./realtimeLiquidation.css";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import moment from "moment";
@@ -84,15 +84,14 @@ const RealTimeLiquidations = ({ widgeTitle }: propsType) => {
   };
 
   useEffect(() => {
-    getData();
+    const interval = setInterval(() => getData(), 3000);
+    return () => {
+      clearInterval(interval);
+    };
   }, [filter]);
 
-  useEffect(() => {
-    setInterval(() => getData(), 3000);
-  }, []);
-
   return (
-    <div className="w-full h-full overflow-clip p-6 flex flex-col p-6">
+    <div className="w-full h-full overflow-clip p-6 flex flex-col p-6 bg-black">
       {/* widget header */}
       <div className="grid gap-4">
         <div className="flex justify-center font-medium text-base">
@@ -145,7 +144,6 @@ const RealTimeLiquidations = ({ widgeTitle }: propsType) => {
       <div className="overflow-y-auto scroll-div">
         <table className="w-full text-[#626D7C] border-separate border-spacing-y-2">
           <tr className="font-medium text-sm">
-            <th></th>
             <th className="text-left">Symbol</th>
             <th className="text-right">Price</th>
             <th className="text-right">Value</th>
@@ -154,8 +152,15 @@ const RealTimeLiquidations = ({ widgeTitle }: propsType) => {
           {liquidations.length > 0 &&
             liquidations.map((liquidation, i) => (
               <tr key={i} className="font-semibold text-xs">
-                <td></td>
-                <td>{liquidation.MarketName}</td>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <img
+                      className="w-4"
+                      src={`/exchanges/${liquidation.Exchange} Symbol.png`}
+                    />
+                    <span>{liquidation.MarketName}</span>
+                  </div>
+                </td>
                 <td
                   className={`text-right ${
                     liquidation.Side === `Long`
